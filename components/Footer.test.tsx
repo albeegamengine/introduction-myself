@@ -4,21 +4,21 @@ import { Footer } from './Footer';
 
 describe('Footer Component', () => {
   const defaultProps = {
-    copyright: '© 2024 岩下直人. All rights reserved.',
+    copyright: '© 2025 岩下直人. All rights reserved.',
   };
 
   describe('著作権表示の検証', () => {
     it('著作権表示が正しく表示されること', () => {
       render(<Footer {...defaultProps} />);
       
-      const copyrightText = screen.getByText('© 2024 岩下直人. All rights reserved.');
+      const copyrightText = screen.getByText('© 2025 岩下直人. All rights reserved.');
       expect(copyrightText).toBeInTheDocument();
     });
 
     it('著作権表示が適切なHTML要素で表示されること', () => {
       render(<Footer {...defaultProps} />);
       
-      const copyrightText = screen.getByText('© 2024 岩下直人. All rights reserved.');
+      const copyrightText = screen.getByText('© 2025 岩下直人. All rights reserved.');
       expect(copyrightText.tagName).toBe('P');
     });
 
