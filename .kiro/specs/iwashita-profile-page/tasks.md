@@ -30,7 +30,7 @@
   - プロフィール画像のalt属性を検証
   - _要件: 1.1, 1.2, 1.3_
 
-- [ ] 5. Profileコンポーネントの実装
+- [x] 5. Profileコンポーネントの実装
   - components/Profile.tsxを作成
   - 経歴情報と専門分野を表示
   - Shadcn UI CardとBadgeを使用
