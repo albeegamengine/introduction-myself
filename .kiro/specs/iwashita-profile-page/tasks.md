@@ -1,6 +1,6 @@
 # 実装計画
 
-- [ ] 1. プロジェクトのセットアップとNext.js初期化
+- [x] 1. プロジェクトのセットアップとNext.js初期化
   - Next.js 15.1.4+、React 19.0.1+、TypeScriptでプロジェクトを初期化
   - Tailwind CSS、Shadcn UI、必要な依存関係をインストール
   - プロジェクト構造（app/、components/、types/、data/、lib/）を作成
