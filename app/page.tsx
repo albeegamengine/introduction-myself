@@ -8,7 +8,7 @@ export default function Home() {
   const currentYear = new Date().getFullYear();
   const copyright = `© ${currentYear} ${profileData.name}. All rights reserved.`;
 
-  const basePath = "/lion-ai";
+  const basePath = "/introduction-myself";
   // 画像のフルパスを作成
   const imagePath = `${basePath}${profileData.profileImage}`;
 
@@ -23,8 +23,8 @@ export default function Home() {
       name: profileData.company.name,
       url: profileData.company.url,
     },
-    image: `https://introduce-myself.github.io${imagePath}`,
-    url: "https://introduce-myself.github.io/lion-ai/",
+    image: `https://albeegamengine.github.io${imagePath}`,
+    url: "https://albeegamengine.github.io/introduction-myself/",
     sameAs: [
       profileData.company.url,
       ...profileData.relatedLinks.map((link) => link.url),
