@@ -10,7 +10,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://introduce-myself.github.io"),
-  title: "麻生真介 | WONQ株式会社 システムエンジニア(SE)",
+  title: "麻生真介",
   description:
     "WONQ株式会社 システムエンジニア(SE) 麻生真介のプロフィールページ。WONQ株式会社にてフルスタックエンジニアとして従事しながら個人開発を進めている。",
   keywords: [
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     locale: "ja_JP",
     url: "https://introduce-myself.github.io/",
     siteName: "麻生真介 プロフィール",
-    title: "麻生真介 | WONQ株式会社 システムエンジニア(SE)",
+    title: "麻生真介",
     description:
       "WONQ株式会社 システムエンジニア(SE) 麻生真介のプロフィールページ。WONQ株式会社にてフルスタックエンジニアとして従事しながら個人開発を進めている。",
     images: [
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   //https://github.com/vercel/next.js/blob/canary/packages/next/src/lib/metadata/types/twitter-types.ts
   twitter: {
     card: "summary",
-    title: "麻生真介 | WONQ株式会社 システムエンジニア(SE)",
+    title: "麻生真介",
     description:
       "WONQ株式会社 システムエンジニア(SE) 麻生真介のプロフィールページ。WONQ株式会社にてフルスタックエンジニアとして従事しながら個人開発を進めている。",
     images: ["/images/albee_icon.png"],

@@ -497,8 +497,8 @@ _任意の_ CSS ファイルについて、モバイル、タブレット、デ�
 
 1. **メタタグ**
 
-   - title: "麻生真介 | WONQ 株式会社 システムエンジニア(SE)"
-   - meta description: 岩下氏の簡潔な紹介文（150-160 文字）
+   - title: "albee"
+   - meta description: 麻生氏の簡潔な紹介文（150-160 文字）
    - Open Graph タグ（SNS シェア用）
 
 2. **構造化データ**
