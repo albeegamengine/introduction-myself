@@ -9,7 +9,7 @@ export const profileData: ProfileData = {
     name: "個人開発用ブログ(Blogger)",
     url: "https://linealbeegames4730.blogspot.com/",
   },
-  profileImage: "/public/images/albee_icon.png",
+  profileImage: "/images/albee_icon.png",
   biography: [
     "WONQ株式会社 システムエンジニア。",
     "九州大学大学院総合理工学府修了。",
@@ -39,6 +39,12 @@ export const profileData: ProfileData = {
       name: "YouTube",
       url: "https://www.YouTube.com/@albeegamengine",
       description: "個人開発用YouTubeのリンクです。",
+      isExternal: true,
+    },
+    {
+      name: "GitHub",
+      url: "https://github.com/albeegamengine",
+      description: "個人開発用のGitHubのリンクです。",
       isExternal: true,
     },
   ],
