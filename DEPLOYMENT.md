@@ -32,7 +32,7 @@ Vercel は、Next.js の開発元である Vercel 社が提供するホスティ
 
 ```bash
 # プロジェクトディレクトリに移動
-cd iwashita-profile-page
+cd my-profile-page
 
 # Gitリポジトリの初期化（まだの場合）
 git init
@@ -41,13 +41,13 @@ git init
 git add .
 
 # 初回コミット
-git commit -m "Initial commit: Profile page for Naoto Iwashita"
+git commit -m "Initial commit: Profile page for Shinsuke Aso"
 
 # GitHubリポジトリを作成（GitHub CLIを使用する場合）
-gh repo create iwashita-profile-page --public --source=. --remote=origin
+gh repo create my-profile-page --public --source=. --remote=origin
 
 # または、GitHubウェブサイトでリポジトリを作成してから
-git remote add origin https://github.com/your-username/iwashita-profile-page.git
+git remote add origin https://github.com/your-username/my-profile-page.git
 
 # リモートリポジトリにプッシュ
 git push -u origin main
@@ -64,7 +64,7 @@ git push -u origin main
 
 1. Vercel ダッシュボードで「Add New...」→「Project」をクリック
 2. 「Import Git Repository」セクションで GitHub リポジトリを検索
-3. `iwashita-profile-page`リポジトリを選択して「Import」をクリック
+3. `my-profile-page`リポジトリを選択して「Import」をクリック
 
 ### ステップ 4: プロジェクト設定
 
@@ -83,7 +83,7 @@ Vercel が自動的に以下の設定を検出します：
 
 - ビルドログがリアルタイムで表示されます
 - 数分でデプロイが完了します
-- デプロイが成功すると、URL が発行されます（例: `https://iwashita-profile-page.vercel.app`）
+- デプロイが成功すると、URL が発行されます（例: `https://my-profile-page.vercel.app`）
 
 ### ステップ 6: 動作確認
 
@@ -91,7 +91,7 @@ Vercel が自動的に以下の設定を検出します：
 
 - [ ] ページが正常に表示される
 - [ ] プロフィール画像が表示される
-- [ ] Lion AI と WONQ へのリンクが機能する
+- [ ] 個人開発用ブログ へのリンクが機能する
 - [ ] レスポンシブデザインが機能する
 
 ## GitHub Pages へのデプロイ
@@ -181,7 +181,7 @@ GitHub Actions が自動的に実行され、数分後にサイトが公開さ�
 ### ステップ 4: URL の確認
 
 - リポジトリの「Settings」→「Pages」で URL を確認
-- 通常は`https://your-username.github.io/iwashita-profile-page/`
+- 通常は`https://your-username.github.io/my-profile-page/`
 
 ## 環境変数の設定
 
@@ -224,7 +224,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 1. Vercel ダッシュボードでプロジェクトを選択
 2. 「Settings」タブをクリック
 3. 左サイドバーの「Domains」をクリック
-4. カスタムドメインを入力（例: `iwashita.example.com`）
+4. カスタムドメインを入力（例: `myprofile.example.com`）
 5. 「Add」をクリック
 
 #### ステップ 2: DNS レコードの設定
@@ -254,7 +254,7 @@ Vercel が推奨する DNS 設定が表示されます。ドメインレジス�
 ### GitHub Pages でのカスタムドメイン設定
 
 1. リポジトリの「Settings」→「Pages」を開く
-2. 「Custom domain」にドメインを入力（例: `iwashita.example.com`）
+2. 「Custom domain」にドメインを入力（例: `myprofile.example.com`）
 3. 「Save」をクリック
 4. DNS レコードを設定：
 
@@ -283,8 +283,8 @@ Vercel が推奨する DNS 設定が表示されます。ドメインレジス�
 
 ### リンク
 
-- [ ] Lion AI リンクが機能する（https://www.lion-ai.co.jp/）
-- [ ] WONQ リンクが機能する（https://linealbeegames4730.blogspot.com/）
+- [ ] YouTube リンクが機能する（https://www.YouTube.com/@albeegamengine）
+- [ ] 個人開発用ブログ リンクが機能する（https://linealbeegames4730.blogspot.com/）
 - [ ] リンクが新しいタブで開く
 - [ ] rel="noopener noreferrer"が設定されている
 
@@ -444,7 +444,7 @@ const HeavyComponent = dynamic(() => import("./HeavyComponent"), {
 - [Next.js 公式ドキュメント](https://nextjs.org/docs)
 - [Vercel 公式ドキュメント](https://vercel.com/docs)
 - [GitHub Pages 公式ドキュメント](https://docs.github.com/pages)
-- [プロジェクトの GitHub リポジトリ](https://github.com/your-username/iwashita-profile-page)
+- [プロジェクトの GitHub リポジトリ](https://github.com/your-username/my-profile-page)
 
 ## まとめ
 

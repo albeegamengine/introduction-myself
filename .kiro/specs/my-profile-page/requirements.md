@@ -3,7 +3,7 @@
 ## はじめに
 
 本プロジェクトは、WONQ 株式会社のシステムエンジニア(SE)である麻生真介のプロフィールページを GitHub Pages（.github.io ドメイン）で公開するものです。
-主な目的は、プロフェッショナルなプロフィールページを通じて、https://www.lion-ai.co.jp/ への被リンクを獲得することです。
+主な目的は、プロフェッショナルなプロフィールページを通じて、hhttps://www.YouTube.com/@albeegamengine への被リンクを獲得することです。
 
 ## 用語集
 
@@ -34,9 +34,9 @@
 #### 受入基準
 
 1. WHEN 訪問者が Profile Page を閲覧する THEN Profile Page SHALL https://linealbeegames4730.blogspot.com/へのハイパーリンクを含む
-2. WHEN 訪問者が Lion AI リンクをクリックする THEN Profile Page SHALL 訪問者をhttps://linealbeegames4730.blogspot.com/ へ遷移させる
-3. WHEN 検索エンジンクローラーが Profile Page をクロールする THEN Profile Page SHALL Lion AI へのリンクを HTML 内に通常のアンカータグとして含む（JavaScript による動的生成ではない）
-4. WHEN Lion AI リンクが表示される THEN Profile Page SHALL リンクに適切なコンテキスト（説明文や関連情報）を提供する
+2. WHEN 訪問者が YouTube リンクをクリックする THEN Profile Page SHALL 訪問者をhttps://linealbeegames4730.blogspot.com/ へ遷移させる
+3. WHEN 検索エンジンクローラーが Profile Page をクロールする THEN Profile Page SHALL YouTube へのリンクを HTML 内に通常のアンカータグとして含む（JavaScript による動的生成ではない）
+4. WHEN YouTube リンクが表示される THEN Profile Page SHALL リンクに適切なコンテキスト（説明文や関連情報）を提供する
 
 ### 要件 3
 

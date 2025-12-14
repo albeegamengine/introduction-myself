@@ -6,8 +6,8 @@ import { ExternalLink } from "@/types/profile";
 describe("Links Component", () => {
   const mockLinks: ExternalLink[] = [
     // {
-    //   name: "Lion AI",
-    //   url: "https://www.lion-ai.co.jp/",
+    //   name: "YouTube",
+    //   url: "hhttps://www.YouTube.com/@albeegamengine",
     //   description: "AI技術の研究開発における協業パートナー",
     //   isExternal: true,
     // },
@@ -19,35 +19,40 @@ describe("Links Component", () => {
     },
   ];
 
-  describe("要件 2.1, 2.2: Lion AIリンクの存在と正しいURL", () => {
-    it("Lion AIリンクが存在すること", () => {
+  describe("要件 2.1, 2.2: YouTubeリンクの存在と正しいURL", () => {
+    it("YouTubeリンクが存在すること", () => {
       render(<Links links={mockLinks} />);
 
-      // すべてのリンクを取得して、Lion AIのリンクが存在することを確認
+      // すべてのリンクを取得して、YouTubeのリンクが存在することを確認
       const links = screen.getAllByRole("link", { name: /サイトを訪問/i });
       expect(links.length).toBeGreaterThanOrEqual(1);
 
-      // Lion AIのリンクが存在することを確認
+      // YouTubeのリンクが存在することを確認
       const lionAILink = links.find(
-        (link) => link.getAttribute("href") === "https://www.lion-ai.co.jp/"
+        (link) =>
+          link.getAttribute("href") ===
+          "hhttps://www.YouTube.com/@albeegamengine"
       );
       expect(lionAILink).toBeInTheDocument();
     });
 
-    it("Lion AIリンクが正しいURLを持つこと", () => {
+    it("YouTubeリンクが正しいURLを持つこと", () => {
       render(<Links links={mockLinks} />);
 
-      // Lion AIのリンクを取得
+      // YouTubeのリンクを取得
       const links = screen.getAllByRole("link", { name: /サイトを訪問/i });
-      const lionAILink = links[0]; // 最初のリンクがLion AI
+      const lionAILink = links[0]; // 最初のリンクがYouTube
 
-      expect(lionAILink).toHaveAttribute("href", "https://www.lion-ai.co.jp/");
+      expect(lionAILink).toHaveAttribute(
+        "href",
+        "hhttps://www.YouTube.com/@albeegamengine"
+      );
     });
 
-    it("Lion AIの名前と説明が表示されること", () => {
+    it("YouTubeの名前と説明が表示されること", () => {
       render(<Links links={mockLinks} />);
 
-      expect(screen.getByText("Lion AI")).toBeInTheDocument();
+      expect(screen.getByText("YouTube")).toBeInTheDocument();
       expect(
         screen.getByText("AI技術の研究開発における協業パートナー")
       ).toBeInTheDocument();
@@ -148,7 +153,7 @@ describe("Links Component", () => {
       render(<Links links={mockLinks} />);
 
       const linkNames = screen.getAllByRole("heading", { level: 3 });
-      expect(linkNames[0]).toHaveTextContent("Lion AI");
+      expect(linkNames[0]).toHaveTextContent("YouTube");
       expect(linkNames[1]).toHaveTextContent("WONQ株式会社");
     });
   });

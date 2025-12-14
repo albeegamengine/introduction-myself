@@ -1,10 +1,10 @@
-# robots.txt for iwashita-naoto.github.io
+# robots.txt for introduce-myself.github.io
 
 User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://iwashita-naoto.github.io/sitemap.xml
+Sitemap: https://introduce-myself.github.io/sitemap.xml
 
 # Disallow crawling of build artifacts
 Disallow: /_next/

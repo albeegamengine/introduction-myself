@@ -1,5 +1,5 @@
 /**
- * Feature: iwashita-profile-page, Property 4: 必須メタデータが存在する
+ * Feature: my-profile-page, Property 4: 必須メタデータが存在する
  *
  * **検証: 要件 7.1, 7.2**
  *
@@ -12,7 +12,7 @@ import fc from "fast-check";
 import { metadata } from "./layout";
 
 describe("プロパティベーステスト: 必須メタデータ", () => {
-  it("Feature: iwashita-profile-page, Property 4: 必須メタデータが存在する", () => {
+  it("Feature: my-profile-page, Property 4: 必須メタデータが存在する", () => {
     fc.assert(
       fc.property(fc.constant(null), () => {
         // メタデータオブジェクトが存在することを確認

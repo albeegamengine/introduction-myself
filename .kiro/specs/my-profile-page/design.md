@@ -2,7 +2,7 @@
 
 ## 概要
 
-本プロジェクトは、WONQ 株式会社のシステムエンジニア(SE)である麻生真介のプロフィールページを、GitHub Pages を使用して静的 Web サイトとして実装します。このページは、プロフェッショナルな外観を持ち、レスポンシブデザインを採用し、SEO 最適化を施した単一ページの Web サイトです。主な目的は、Lion AI（https://www.lion-ai.co.jp/）への被リンクを自然な形で提供することです。
+本プロジェクトは、WONQ 株式会社のシステムエンジニア(SE)である麻生真介のプロフィールページを、GitHub Pages を使用して静的 Web サイトとして実装します。このページは、プロフェッショナルな外観を持ち、レスポンシブデザインを採用し、SEO 最適化を施した単一ページの Web サイトです。主な目的は、Blogger（linealbeegames4730.blogspot.com / https://www.YouTube.com/@albeegamengine）への被リンクを自然な形で提供することです。
 
 参考サイト（https://ujitoko.github.io/）のようなシンプルで洗練されたデザインアプローチを採用します。
 
@@ -92,7 +92,7 @@ graph TD
     C --> G[Footer Component]
     E --> H[Profile Data]
     F --> I[External Links]
-    I --> J[Lion AI]
+    I --> J[YouTube]
     I --> K[WONQ]
     B --> L[API Routes]
     L --> M[Contact API]
@@ -161,7 +161,7 @@ interface LinksProps {
 **責務:**
 
 - 外部リンクの表示
-- Lion AI リンク（コンテキスト付き）
+- YouTube リンク（コンテキスト付き）
 - WONQ リンク
 - アクセシビリティ対応（rel="noopener noreferrer"）
 
@@ -291,15 +291,15 @@ export const profileData: ProfileData = {
     {
       name: "Blogger",
       url: "https://linealbeegames4730.blogspot.com/",
-      description: "ブログ",
+      description: "個人開発用ブログ",
       isExternal: true,
     },
-   //  {
-   //    name: "Lion AI",
-   //    url: "https://www.lion-ai.co.jp/",
-   //    description: "WONQ株式会社のAI事業です。",
-   //    isExternal: true,
-   //  },
+    {
+      name: "YouTube",
+      url: "https://www.YouTube.com/@albeegamengine",
+      description: "YouTubeリンク",
+      isExternal: true,
+    },
   ],
 };
 ```
@@ -353,7 +353,7 @@ _任意の_ CSS ファイルについて、モバイル、タブレット、デ�
 
 ### リンクエラー
 
-- 外部リンク（Lion AI、WONQ）が無効な場合でも、ページは正常に表示される
+- 外部リンク（YouTube、WONQ）が無効な場合でも、ページは正常に表示される
 - リンクは新しいタブで開くことを推奨（target="\_blank"と rel="noopener noreferrer"）
 
 ### ブラウザ互換性
@@ -384,7 +384,7 @@ _任意の_ CSS ファイルについて、モバイル、タブレット、デ�
 
 2. **リンク検証テスト**
 
-   - Lion AI リンクの存在と正しい URL
+   - YouTube リンクの存在と正しい URL
    - WONQ リンクの存在と正しい URL
    - すべてのリンクが有効な URL 形式を持つ
    - 外部リンクに rel="noopener noreferrer"が設定されている
@@ -423,26 +423,26 @@ _任意の_ CSS ファイルについて、モバイル、タブレット、デ�
 1. **プロパティ 1: すべての外部リンクは有効な URL 形式を持つ**
 
    - ランダムな HTML 構造を生成し、すべての a タグの href 属性が有効な URL 形式であることを検証
-   - タグ: `Feature: iwashita-profile-page, Property 1: すべての外部リンクは有効なURL形式を持つ`
+   - タグ: `Feature: my-profile-page, Property 1: すべての外部リンクは有効なURL形式を持つ`
 
 2. **プロパティ 2: すべての画像は代替テキストを持つ**
 
    - ランダムな HTML 構造を生成し、すべての img タグに alt 属性が存在し空でないことを検証
-   - タグ: `Feature: iwashita-profile-page, Property 2: すべての画像は代替テキストを持つ`
+   - タグ: `Feature: my-profile-page, Property 2: すべての画像は代替テキストを持つ`
 
 3. **プロパティ 3: HTML はセマンティック構造を持つ**
 
    - 有効な HTML ドキュメントについて、header、main、footer が存在することを検証
-   - タグ: `Feature: iwashita-profile-page, Property 3: HTMLはセマンティック構造を持つ`
+   - タグ: `Feature: my-profile-page, Property 3: HTMLはセマンティック構造を持つ`
 
 4. **プロパティ 4: 必須メタデータが存在する**
 
    - 有効な HTML ドキュメントについて、title と meta description が存在し空でないことを検証
-   - タグ: `Feature: iwashita-profile-page, Property 4: 必須メタデータが存在する`
+   - タグ: `Feature: my-profile-page, Property 4: 必須メタデータが存在する`
 
 5. **プロパティ 5: レスポンシブデザインのメディアクエリが存在する**
    - CSS ファイルについて、モバイル、タブレット、デスクトップ用のメディアクエリが定義されていることを検証
-   - タグ: `Feature: iwashita-profile-page, Property 5: レスポンシブデザインのメディアクエリが存在する`
+   - タグ: `Feature: my-profile-page, Property 5: レスポンシブデザインのメディアクエリが存在する`
 
 ### E2E テスト（オプション）
 
@@ -527,22 +527,22 @@ _任意の_ CSS ファイルについて、モバイル、タブレット、デ�
    - 画像の適切な alt 属性
    - aria-label の適切な使用
 
-### Lion AI リンクの自然な統合
+### YouTube リンクの自然な統合
 
-Lion AI へのリンクは、以下のいずれかの方法で自然に統合します：
+YouTube へのリンクは、以下のいずれかの方法で自然に統合します：
 
 1. **専門分野セクション内**
 
-   - 「AI 技術の活用」などの文脈で Lion AI を紹介
-   - 例: "AI 技術の研究開発にも注力しており、[Lion AI](https://www.lion-ai.co.jp/)との協業を通じて..."
+   - 「AI 技術の活用」などの文脈で YouTube を紹介
+   - 例: "AI 技術の研究開発にも注力しており、[YouTube](hhttps://www.YouTube.com/@albeegamengine)との協業を通じて..."
 
 2. **関連プロジェクトセクション**
 
    - 独立したセクションとして関連プロジェクトを紹介
-   - Lion AI を主要な協業先として記載
+   - YouTube を主要な協業先として記載
 
 3. **フッターリンク**
-   - "関連リンク"セクションに Lion AI を含める
+   - "関連リンク"セクションに YouTube を含める
    - 適切な説明文を添える
 
 ## 将来の拡張性
