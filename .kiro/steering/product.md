@@ -1,6 +1,6 @@
 # Product Overview
 
-This is a static profile page for Naoto Iwashita (岩下直人), CEO of WONQ株式会社. The page is designed for deployment to GitHub Pages and presents professional information including biography, expertise, related links, and contact information.
+This is a static profile page for Shinsuke Aso (麻生真介), SE of WONQ 株式会社 and Indie Hacker. The page is designed for deployment to GitHub Pages and presents professional information including biography, expertise, related links, and contact information.
 
 ## Key Features
 

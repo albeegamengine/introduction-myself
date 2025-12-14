@@ -3,15 +3,15 @@
 import { ProfileData } from "../types/profile";
 
 export const profileData: ProfileData = {
-  name: "岩下直人",
-  title: "代表取締役",
+  name: "麻生真介",
+  title: "システムエンジニア(SE)",
   company: {
     name: "WONQ株式会社",
-    url: "https://www.wonq-xr.jp/",
+    url: "https://linealbeegames4730.blogspot.com/",
   },
-  profileImage: "/images/profile.jpg",
+  profileImage: "/images/albee_icon.png",
   biography: [
-    "WONQ株式会社 代表取締役社長。",
+    "WONQ株式会社 システムエンジニア(SE)社長。",
     "九州大学大学院芸術工学府卒業。",
     "エンジニアとして大手電力会社に勤務。",
     "退職後にVR開発/アプリケーション開発事業をメインとするWONQ株式会社を創業。",
@@ -32,7 +32,7 @@ export const profileData: ProfileData = {
   relatedLinks: [
     {
       name: "WONQ株式会社",
-      url: "https://www.wonq-xr.jp/",
+      url: "https://linealbeegames4730.blogspot.com/",
       description: "会社公式サイト",
       isExternal: true,
     },

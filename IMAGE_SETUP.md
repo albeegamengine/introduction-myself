@@ -4,9 +4,9 @@
 
 ## 📋 チェックリスト
 
-- [ ] プロフィール画像を準備（800x800px推奨）
-- [ ] 画像を最適化（WebP形式、200KB以下）
-- [ ] `public/images/profile.jpg`または`profile.webp`に配置
+- [ ] プロフィール画像を準備（800x800px 推奨）
+- [ ] 画像を最適化（WebP 形式、200KB 以下）
+- [ ] `public/images/albee_icon.png`または`profile.webp`に配置
 - [ ] ローカルで動作確認（`npm run dev`）
 - [ ] ビルドして確認（`npm run build`）
 
@@ -15,9 +15,9 @@
 ### 1. 画像の要件
 
 - **サイズ**: 800x800px（正方形）
-- **形式**: WebP（推奨）またはJPG
-- **ファイルサイズ**: 200KB以下
-- **品質**: 高品質（WebPの場合はquality 80-90）
+- **形式**: WebP（推奨）または JPG
+- **ファイルサイズ**: 200KB 以下
+- **品質**: 高品質（WebP の場合は quality 80-90）
 
 ### 2. 画像の最適化
 
@@ -50,7 +50,7 @@ cwebp -q 70 -resize 800 800 original.jpg -o profile-low.webp
 最適化した画像を以下のパスに配置：
 
 ```
-public/images/profile.jpg
+public/images/albee_icon.png
 ```
 
 または
@@ -59,7 +59,7 @@ public/images/profile.jpg
 public/images/profile.webp
 ```
 
-WebP形式を使用する場合は、`data/profileData.ts`を更新：
+WebP 形式を使用する場合は、`data/profileData.ts`を更新：
 
 ```typescript
 export const profileData: ProfileData = {
@@ -88,7 +88,7 @@ npm run dev
 npm run build
 
 # outディレクトリが生成される
-# out/images/profile.jpg が存在することを確認
+# out/images/albee_icon.png が存在することを確認
 ls -lh out/images/
 ```
 
@@ -97,41 +97,43 @@ ls -lh out/images/
 ### 画像が表示されない
 
 1. **ファイルパスを確認**
-   - `public/images/profile.jpg`に配置されているか
+
+   - `public/images/albee_icon.png`に配置されているか
    - ファイル名が正確か（大文字小文字を含む）
 
 2. **ブラウザのキャッシュをクリア**
+
    - 開発サーバーを再起動
    - ブラウザのハードリロード（Cmd+Shift+R / Ctrl+Shift+R）
 
 3. **コンソールエラーを確認**
    - ブラウザの開発者ツールを開く
-   - Consoleタブでエラーメッセージを確認
+   - Console タブでエラーメッセージを確認
 
 ### 画像が大きすぎる
 
 ```bash
 # ファイルサイズを確認
-ls -lh public/images/profile.jpg
+ls -lh public/images/albee_icon.png
 
 # 200KBを超える場合は、品質を下げて再圧縮
 cwebp -q 75 -resize 800 800 original.jpg -o profile.webp
 ```
 
-### WebP形式が表示されない
+### WebP 形式が表示されない
 
-古いブラウザではWebPがサポートされていない可能性があります。
-その場合は、JPG形式を使用してください：
+古いブラウザでは WebP がサポートされていない可能性があります。
+その場合は、JPG 形式を使用してください：
 
 ```typescript
 // data/profileData.ts
-profileImage: "/images/profile.jpg", // WebPではなくJPGを使用
+profileImage: "/images/albee_icon.png", // WebPではなくJPGを使用
 ```
 
 ## 📚 参考リンク
 
 - [Squoosh - 画像圧縮ツール](https://squoosh.app/)
-- [WebP公式サイト](https://developers.google.com/speed/webp)
+- [WebP 公式サイト](https://developers.google.com/speed/webp)
 - [Next.js Image Optimization](https://nextjs.org/docs/app/building-your-application/optimizing/images)
 
 ## ✅ アクセシビリティ
@@ -147,7 +149,7 @@ profileImage: "/images/profile.jpg", // WebPではなくJPGを使用
 ## 🚀 デプロイ前の最終チェック
 
 - [ ] 画像が正しく表示される
-- [ ] 画像のファイルサイズが200KB以下
+- [ ] 画像のファイルサイズが 200KB 以下
 - [ ] ブラウザの開発者ツールでエラーがない
 - [ ] モバイル表示でも画像が適切に表示される
 - [ ] すべてのテストが通過する（`npm run test`）
