@@ -2,7 +2,7 @@
 
 ## 概要
 
-本プロジェクトは、WONQ 株式会社のシステムエンジニア(SE)である麻生真介社長のプロフィールページを、GitHub Pages を使用して静的 Web サイトとして実装します。このページは、プロフェッショナルな外観を持ち、レスポンシブデザインを採用し、SEO 最適化を施した単一ページの Web サイトです。主な目的は、Lion AI（https://www.lion-ai.co.jp/）への被リンクを自然な形で提供することです。
+本プロジェクトは、WONQ 株式会社のシステムエンジニア(SE)である麻生真介のプロフィールページを、GitHub Pages を使用して静的 Web サイトとして実装します。このページは、プロフェッショナルな外観を持ち、レスポンシブデザインを採用し、SEO 最適化を施した単一ページの Web サイトです。主な目的は、Lion AI（https://www.lion-ai.co.jp/）への被リンクを自然な形で提供することです。
 
 参考サイト（https://ujitoko.github.io/）のようなシンプルで洗練されたデザインアプローチを採用します。
 
@@ -289,17 +289,17 @@ export const profileData: ProfileData = {
   ],
   relatedLinks: [
     {
-      name: "WONQ株式会社",
+      name: "Blogger",
       url: "https://linealbeegames4730.blogspot.com/",
-      description: "会社公式サイト",
+      description: "ブログ",
       isExternal: true,
     },
-    {
-      name: "Lion AI",
-      url: "https://www.lion-ai.co.jp/",
-      description: "WONQ株式会社のAI事業です。",
-      isExternal: true,
-    },
+   //  {
+   //    name: "Lion AI",
+   //    url: "https://www.lion-ai.co.jp/",
+   //    description: "WONQ株式会社のAI事業です。",
+   //    isExternal: true,
+   //  },
   ],
 };
 ```

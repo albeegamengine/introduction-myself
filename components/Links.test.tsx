@@ -5,16 +5,16 @@ import { ExternalLink } from "@/types/profile";
 
 describe("Links Component", () => {
   const mockLinks: ExternalLink[] = [
+    // {
+    //   name: "Lion AI",
+    //   url: "https://www.lion-ai.co.jp/",
+    //   description: "AI技術の研究開発における協業パートナー",
+    //   isExternal: true,
+    // },
     {
-      name: "Lion AI",
-      url: "https://www.lion-ai.co.jp/",
-      description: "AI技術の研究開発における協業パートナー",
-      isExternal: true,
-    },
-    {
-      name: "WONQ株式会社",
+      name: "Blogger",
       url: "https://linealbeegames4730.blogspot.com/",
-      description: "会社公式サイト",
+      description: "個人開発用ブログ",
       isExternal: true,
     },
   ];
