@@ -42,13 +42,16 @@ export const metadata: Metadata = {
       },
     ],
   },
+  //meta data property source
+  //https://github.com/vercel/next.js/blob/canary/packages/next/src/lib/metadata/types/twitter-types.ts
   twitter: {
     card: "summary",
     title: "麻生真介 | WONQ株式会社 システムエンジニア(SE)",
     description:
       "WONQ株式会社 システムエンジニア(SE) 麻生真介のプロフィールページ。WONQ株式会社にてフルスタックエンジニアとして従事しながら個人開発を進めている。",
     images: ["/images/albee_icon.png"],
-    url: "@albeegamengine",
+    creator: "@albeegamengine",
+    site: "@albeegamengine",
   },
   robots: {
     index: true,
