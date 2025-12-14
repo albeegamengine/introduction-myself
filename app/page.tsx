@@ -23,8 +23,8 @@ export default function Home() {
       name: profileData.company.name,
       url: profileData.company.url,
     },
-    image: `https://iwashita-naoto.github.io${imagePath}`,
-    url: "https://iwashita-naoto.github.io/lion-ai/",
+    image: `https://introduce-myself.github.io${imagePath}`,
+    url: "https://introduce-myself.github.io/lion-ai/",
     sameAs: [
       profileData.company.url,
       ...profileData.relatedLinks.map((link) => link.url),

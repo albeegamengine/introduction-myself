@@ -6,10 +6,10 @@ export const profileData: ProfileData = {
   name: "麻生真介",
   title: "システムエンジニア(SE)",
   company: {
-    name: "WONQ株式会社",
+    name: "個人開発用ブログ(Blogger)",
     url: "https://linealbeegames4730.blogspot.com/",
   },
-  profileImage: "/images/albee_icon.png",
+  profileImage: "/lion-ai/images/albee_icon.png",
   biography: [
     "WONQ株式会社 システムエンジニア。",
     "九州大学大学院総合理工学府修了。",
@@ -30,14 +30,14 @@ export const profileData: ProfileData = {
   ],
   relatedLinks: [
     {
-      name: "Blogger",
+      name: "個人開発用ブログ",
       url: "https://linealbeegames4730.blogspot.com/",
-      description: "個人開発用ブログ",
+      description: "個人開発用ブログ(Blogger)のリンクです。",
       isExternal: true,
     },
     // {
-    //   name: "Lion AI",
-    //   url: "https://www.lion-ai.co.jp/",
+    //   name: "YouTube",
+    //   url: "hhttps://www.YouTube.com/@albeegamengine",
     //   description: "WONQ株式会社のAI事業",
     //   isExternal: true,
     // },

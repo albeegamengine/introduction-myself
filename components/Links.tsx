@@ -18,7 +18,7 @@ export const Links: React.FC<LinksProps> = ({ links }) => {
     <Card className="w-full">
       <CardHeader>
         <CardTitle>関連リンク</CardTitle>
-        <CardDescription>個人開発用ブログ</CardDescription>
+        <CardDescription>個人開発用ブログのURLです。</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         {links.map((link, index) => (
