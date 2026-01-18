@@ -3,7 +3,7 @@
 import { ProfileData } from "../types/profile";
 
 export const profileData: ProfileData = {
-  name: "麻生真介",
+  name: "albee",
   title: "システムエンジニア(SE)",
   company: {
     name: "個人開発用ブログ(Blogger)",

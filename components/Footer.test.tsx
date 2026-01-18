@@ -4,7 +4,7 @@ import { Footer } from "./Footer";
 
 describe("Footer Component", () => {
   const defaultProps = {
-    copyright: "© 2025 麻生真介. All rights reserved.",
+    copyright: "© 2025 albee. All rights reserved.",
   };
 
   describe("著作権表示の検証", () => {
@@ -12,7 +12,7 @@ describe("Footer Component", () => {
       render(<Footer {...defaultProps} />);
 
       const copyrightText = screen.getByText(
-        "© 2025 麻生真介. All rights reserved."
+        "© 2025 albee. All rights reserved."
       );
       expect(copyrightText).toBeInTheDocument();
     });
@@ -21,7 +21,7 @@ describe("Footer Component", () => {
       render(<Footer {...defaultProps} />);
 
       const copyrightText = screen.getByText(
-        "© 2025 麻生真介. All rights reserved."
+        "© 2025 albee. All rights reserved."
       );
       expect(copyrightText.tagName).toBe("P");
     });
