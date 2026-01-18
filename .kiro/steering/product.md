@@ -1,12 +1,44 @@
-# Product Overview
+# プロダクト概要
 
-This is a static profile page for Shinsuke Aso (麻生真介), SE of WONQ 株式会社 and Indie Hacker. The page is designed for deployment to GitHub Pages and presents professional information including biography, expertise, related links, and contact information.
+これは、WONQ 株式会社のシステムエンジニア(SE)であり個人開発者でもある麻生真介(albee)の静的プロフィールページです。GitHub Pagesでのデプロイメント用に設計されており、経歴、専門分野、関連リンク、連絡先情報などのプロフェッショナルな情報を提供します。
 
-## Key Features
+## 現在の実装状況
 
-- Professional profile display with avatar, name, title, and company
-- Biography and expertise sections
-- External links to related content
-- Responsive design for mobile, tablet, and desktop
-- Static export for GitHub Pages hosting
-- Japanese language content
+プロジェクトは現在、以下の機能を持つ単一ページのプロフィールサイトとして実装されています：
+
+- **単一プロフィールページ**: 現在は統合されたプロフィール情報を表示
+- **プロフェッショナル表示**: アバター、氏名、役職、会社情報
+- **経歴セクション**: 個人的・職業的背景
+- **専門分野タグ**: 技術スキルと専門領域
+- **外部リンク**: Blogger、YouTube、GitHubへのリンク
+- **レスポンシブデザイン**: モバイル、タブレット、デスクトップ最適化
+- **静的エクスポート**: GitHub Pagesデプロイメント用設定
+- **日本語コンテンツ**: すべてのコンテンツが日本語
+
+## 計画中の複数ページ拡張
+
+プロジェクトは複数のプロフィールページをサポートするよう拡張予定です：
+
+1. **趣味用プロフィールページ** (`/hobby` パス) - 個人開発、趣味、技術的興味に焦点
+2. **転職活動用プロフィールページ** (`/career` パス) - 職歴、スキル、キャリア関連情報に焦点
+
+## 主要機能
+
+- アバター、氏名、役職、会社を含むプロフェッショナルなプロフィール表示
+- ページタイプ別のコンテンツを持つ経歴・専門分野セクション
+- 各ページタイプに合わせた外部リンク（趣味用 vs キャリア用）
+- 異なるプロフィールタイプ間のページナビゲーション
+- モバイル、タブレット、デスクトップ対応のレスポンシブデザイン
+- GitHub Pages用の静的エクスポート
+- 日本語コンテンツ
+- 適切なメタデータと構造化データによるSEO最適化
+- `/images/albee_icon.png`を使用したファビコンサポート
+
+## 技術的特徴
+
+- Next.js 15とReact 19で構築
+- カスタムデザインシステムを持つTailwind CSSによるスタイリング
+- 一貫したUIのためのshadcn/uiコンポーネント実装
+- 正確性検証のためのプロパティベーステスト
+- 型安全性のためのTypeScript
+- テストフレームワークとしてVitest

@@ -1,58 +1,115 @@
-# Tech Stack
+# 技術スタック
 
-## Framework & Runtime
+## フレームワーク & ランタイム
 
-- **Next.js 15** (App Router) with static export mode
-- **React 19** with TypeScript
-- **Node.js** (ES2017 target)
+- **Next.js 15.1.9** (App Router) 静的エクスポートモード
+- **React 19.0.1** with TypeScript
+- **Node.js** (ES2017ターゲット)
 
-## Styling
+## スタイリング
 
-- **Tailwind CSS** for utility-first styling
-- **Radix UI** components for accessible primitives
-- **class-variance-authority** and **clsx** for conditional styling
-- **tailwind-merge** via `cn()` utility in `lib/utils.ts`
+- **Tailwind CSS 3.4.1** ユーティリティファーストスタイリング用
+- **Radix UI** アクセシブルなプリミティブコンポーネント用
+- **class-variance-authority** と **clsx** 条件付きスタイリング用
+- **tailwind-merge** `lib/utils.ts`の`cn()`ユーティリティ経由
 
-## UI Component Library
+## UIコンポーネントライブラリ
 
-- Radix UI primitives: Avatar, Separator, Slot
-- **lucide-react** for icons
-- Custom shadcn/ui-style components in `components/ui/`
+- Radix UIプリミティブ：Avatar、Separator、Slot
+- **lucide-react 0.556.0** アイコン用
+- `components/ui/`内のカスタムshadcn/uiスタイルコンポーネント
 
-## Testing
+## テスト
 
-- **Vitest** as test runner
-- **@testing-library/react** for component testing
-- **jsdom** for DOM environment
-- **@testing-library/jest-dom** for assertions
+- **Vitest 4.0.15** テストランナー
+- **@testing-library/react 16.3.0** コンポーネントテスト用
+- **jsdom 27.3.0** DOM環境用
+- **@testing-library/jest-dom 6.9.1** アサーション用
+- **fast-check 4.4.0** プロパティベーステスト用
 
-## Build & Development
+## ビルド & 開発
 
-- **TypeScript** with strict mode enabled
-- Path alias `@/*` maps to project root
-- Static export configured for GitHub Pages (no image optimization)
+- **TypeScript 5** 厳密モード有効
+- パスエイリアス `@/*` がプロジェクトルートにマップ
+- GitHub Pages用静的エクスポート設定（画像最適化なし）
 
-## Common Commands
+## よく使うコマンド
 
 ```bash
-# Development
-npm run dev          # Start Next.js dev server
+# 開発
+npm run dev          # Next.js開発サーバー起動
 
-# Build & Deploy
-npm run build        # Build static export to /out directory
-npm start            # Start production server (not used for static export)
+# ビルド & デプロイ
+npm run build        # /outディレクトリに静的エクスポートをビルド
+npm start            # 本番サーバー起動（静的エクスポートでは未使用）
 
-# Code Quality
-npm run lint         # Run ESLint
+# コード品質
+npm run lint         # ESLint実行
 
-# Testing
-npm run test         # Run Vitest tests (single run, no watch mode)
+# テスト
+npm run test         # Vitestテスト実行（単発実行、ウォッチモードなし）
+
+# デプロイ
+npm run deploy:vercel    # Vercel本番デプロイ
+npm run deploy:preview   # Vercelプレビューデプロイ
 ```
 
-## Configuration Files
+## 設定ファイル
 
-- `next.config.js` - Static export and image settings
-- `tailwind.config.ts` - Custom colors and breakpoints
-- `tsconfig.json` - TypeScript with path aliases
-- `vitest.config.ts` - Test environment and setup
-- `components.json` - shadcn/ui configuration
+- `next.config.js` - 静的エクスポートと画像設定、GitHub Pages用basePath設定
+- `tailwind.config.ts` - カスタムカラーとブレークポイント
+- `tsconfig.json` - パスエイリアス付きTypeScript設定
+- `vitest.config.ts` - テスト環境とセットアップ
+- `components.json` - shadcn/ui設定
+- `vitest.setup.ts` - テストセットアップファイル
+
+## 現在の技術的実装
+
+### Next.js設定
+
+- 静的エクスポートモード（`output: "export"`）
+- GitHub Pages用basePath（`/introduction-myself`）
+- 画像最適化無効（静的エクスポート用）
+- 本番環境でのconsole.log削除
+- パッケージインポート最適化
+
+### Tailwind CSS設定
+
+- カスタムカラーパレット（primary、secondary、accent、text、background、surface）
+- レスポンシブブレークポイント（mobile: 0px、tablet: 768px、desktop: 1024px）
+- カスタムスペーシング、フォントサイズ、ボーダー半径
+- ボックスシャドウ設定
+
+### TypeScript設定
+
+- 厳密モード有効
+- `@/*`パスエイリアス
+- ES2017ターゲット
+- JSX preserve
+
+### テスト設定
+
+- jsdom環境
+- グローバル設定有効
+- React Testing Library統合
+- fast-checkによるプロパティベーステスト対応
+
+## 依存関係
+
+### 本番依存関係
+
+- `@radix-ui/react-*` - UIプリミティブ
+- `autoprefixer` - CSS後処理
+- `class-variance-authority` - バリアント管理
+- `clsx` - 条件付きクラス名
+- `lucide-react` - アイコンライブラリ
+- `tailwind-merge` - Tailwindクラス結合
+
+### 開発依存関係
+
+- `@testing-library/*` - テストライブラリ群
+- `@vitejs/plugin-react` - Vite React プラグイン
+- `eslint` - コード品質チェック
+- `fast-check` - プロパティベーステスト
+- `postcss` - CSS処理
+- `tailwindcss` - CSSフレームワーク
