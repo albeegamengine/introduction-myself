@@ -33,6 +33,9 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <header className="sr-only">
+        <h1>albeeのプロフィール選択</h1>
+      </header>
       <main className="min-h-screen flex flex-col">
         <div className="flex-1 flex items-center justify-center py-12">
           <PageSelector />
