@@ -10,6 +10,23 @@ export interface ExternalLink {
   url: string;
   description: string;
   isExternal?: boolean;
+  category?: "social" | "work" | "hobby" | "portfolio" | "career";
+}
+
+export interface ProjectInfo {
+  name: string;
+  description: string;
+  technologies: string[];
+  url?: string;
+  status: "active" | "completed" | "archived";
+}
+
+export interface WorkExperience {
+  company: string;
+  position: string;
+  period: string;
+  description: string[];
+  technologies?: string[];
 }
 
 export interface ContactInfo {
@@ -24,13 +41,23 @@ export interface SocialLink {
   icon?: string;
 }
 
+export interface PageConfig {
+  title: string;
+  description: string;
+  keywords: string[];
+  ogImage?: string;
+}
+
 export interface ProfileData {
   name: string;
   title: string;
-  company: CompanyInfo;
+  company?: CompanyInfo;
   profileImage: string;
   biography: string[];
   expertise: string[];
   relatedLinks: ExternalLink[];
   contactInfo?: ContactInfo;
+  pageType: "hobby" | "career";
+  projects?: ProjectInfo[];
+  experience?: WorkExperience[];
 }

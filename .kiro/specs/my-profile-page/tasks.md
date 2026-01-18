@@ -6,7 +6,7 @@
 
 ## タスク
 
-- [ ] 1. 複数ページ対応のための型定義とデータモデルの更新
+- [x] 1. 複数ページ対応のための型定義とデータモデルの更新
   - types/profile.ts に新しい型定義を追加（PageConfig、ProjectInfo、WorkExperience等）
   - data/hobbyProfileData.ts に趣味用プロフィールデータを実装
   - data/careerProfileData.ts に転職活動用プロフィールデータを実装

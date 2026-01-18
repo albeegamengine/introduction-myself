@@ -6,7 +6,7 @@ import { CompanyInfo } from "@/types/profile";
 interface HeaderProps {
   name: string;
   title: string;
-  company: CompanyInfo;
+  company?: CompanyInfo;
   profileImage: string;
 }
 
@@ -43,16 +43,18 @@ export function Header({ name, title, company, profileImage }: HeaderProps) {
                 <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-1">
                   {title}
                 </p>
-                <p className="text-base md:text-lg lg:text-xl text-muted-foreground">
-                  <a
-                    href={company.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-primary transition-colors underline decoration-dotted"
-                  >
-                    {company.name}
-                  </a>
-                </p>
+                {company && (
+                  <p className="text-base md:text-lg lg:text-xl text-muted-foreground">
+                    <a
+                      href={company.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-primary transition-colors underline decoration-dotted"
+                    >
+                      {company.name}
+                    </a>
+                  </p>
+                )}
               </div>
             </div>
           </CardContent>

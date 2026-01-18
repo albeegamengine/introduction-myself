@@ -18,15 +18,17 @@ export default function Home() {
     "@type": "Person",
     name: profileData.name,
     jobTitle: profileData.title,
-    worksFor: {
-      "@type": "Organization",
-      name: profileData.company.name,
-      url: profileData.company.url,
-    },
+    ...(profileData.company && {
+      worksFor: {
+        "@type": "Organization",
+        name: profileData.company.name,
+        url: profileData.company.url,
+      },
+    }),
     image: `https://albeegamengine.github.io${imagePath}`,
     url: "https://albeegamengine.github.io/introduction-myself/",
     sameAs: [
-      profileData.company.url,
+      ...(profileData.company ? [profileData.company.url] : []),
       ...profileData.relatedLinks.map((link) => link.url),
     ],
     description: profileData.biography.join(" "),
