@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://introduce-myself.github.io"),
-  title: "albee",
+  metadataBase: new URL("https://albeegamengine.github.io/introduction-myself"),
+  title: "albee - 麻生真介",
   description:
     "WONQ株式会社 システムエンジニア(SE) 麻生真介のプロフィールページ。WONQ株式会社にてフルスタックエンジニアとして従事しながら個人開発を進めている。",
   keywords: [
@@ -25,10 +25,13 @@ export const metadata: Metadata = {
   authors: [{ name: "麻生真介" }],
   creator: "麻生真介",
   publisher: "麻生真介",
+  icons: {
+    icon: "/images/albee_icon.png",
+  },
   openGraph: {
     type: "profile",
     locale: "ja_JP",
-    url: "https://introduce-myself.github.io/",
+    url: "https://albeegamengine.github.io/introduction-myself/",
     siteName: "麻生真介 プロフィール",
     title: "albee",
     description:

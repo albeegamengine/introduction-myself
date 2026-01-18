@@ -1,128 +1,79 @@
 /**
- * Feature: my-profile-page, Property 5: レスポンシブデザインのメディアクエリが存在する
+ * Feature: my-profile-page, Property 1: すべてのプロフィールページは基本情報を表示する
  *
- * **検証: 要件 4.1, 4.2, 4.3**
+ * **検証: 要件 1.3, 1.4**
  *
- * プロパティ: 任意のCSSファイルについて、モバイル、タブレット、デスクトップ用の
- * メディアクエリが定義されているべきです。
+ * プロパティ: すべてのプロフィールページについて、氏名とプロフィール画像が表示されるべきです。
  */
 
 import { describe, it, expect } from "vitest";
+import { hobbyProfileData } from "../data/hobbyProfileData";
+import { careerProfileData } from "../data/careerProfileData";
+import { ProfileData } from "../types/profile";
 import fc from "fast-check";
-import fs from "fs";
-import path from "path";
 
-describe("プロパティベーステスト: レスポンシブデザインのメディアクエリ", () => {
-  it("Feature: my-profile-page, Property 5: レスポンシブデザインのメディアクエリが存在する", () => {
-    fc.assert(
-      fc.property(fc.constant(null), () => {
-        // globals.cssファイルを読み込む
-        const cssPath = path.join(process.cwd(), "app", "globals.css");
-        const cssContent = fs.readFileSync(cssPath, "utf-8");
-
-        // モバイル用メディアクエリが存在することを確認
-        // 要件 4.1: モバイルデバイス（0-767px）
-        const mobileMediaQuery =
-          /@media\s*\([^)]*max-width\s*:\s*767px[^)]*\)/i;
-        expect(cssContent).toMatch(mobileMediaQuery);
-
-        // タブレット用メディアクエリが存在することを確認
-        // 要件 4.2: タブレットデバイス（768px-1023px）
-        const tabletMediaQuery =
-          /@media\s*\([^)]*min-width\s*:\s*768px[^)]*\)\s*and\s*\([^)]*max-width\s*:\s*1023px[^)]*\)/i;
-        expect(cssContent).toMatch(tabletMediaQuery);
-
-        // デスクトップ用メディアクエリが存在することを確認
-        // 要件 4.3: デスクトップブラウザ（1024px以上）
-        const desktopMediaQuery =
-          /@media\s*\([^)]*min-width\s*:\s*1024px[^)]*\)/i;
-        expect(cssContent).toMatch(desktopMediaQuery);
-      }),
-      { numRuns: 100 }
+describe("プロパティベーステスト: すべてのプロフィールページは基本情報を表示する", () => {
+  it("Feature: my-profile-page, Property 1: すべてのプロフィールページは基本情報を表示する", () => {
+    // プロフィールデータのジェネレーター（趣味用と転職活動用の両方をテスト）
+    const profileDataArbitrary = fc.constantFrom(
+      hobbyProfileData,
+      careerProfileData,
     );
-  });
 
-  it("モバイル用メディアクエリが適切なブレークポイントを持つこと", () => {
     fc.assert(
-      fc.property(fc.constant(null), () => {
-        const cssPath = path.join(process.cwd(), "app", "globals.css");
-        const cssContent = fs.readFileSync(cssPath, "utf-8");
+      fc.property(profileDataArbitrary, (profileData: ProfileData) => {
+        // basePath設定（実際のページと同じ設定）
+        const basePath = "/introduction-myself";
+        const imagePath = `${basePath}${profileData.profileImage}`;
 
-        // モバイル用メディアクエリ（max-width: 767px）が存在することを確認
-        const mobileBreakpoint = /max-width\s*:\s*767px/i;
-        expect(cssContent).toMatch(mobileBreakpoint);
+        // 要件 1.3: 氏名が存在し、空でないことを確認
+        expect(profileData.name).toBeTruthy();
+        expect(typeof profileData.name).toBe("string");
+        expect(profileData.name.length).toBeGreaterThan(0);
+
+        // 要件 1.4: プロフィール画像パスが存在し、正しい形式であることを確認
+        expect(profileData.profileImage).toBeTruthy();
+        expect(typeof profileData.profileImage).toBe("string");
+        expect(profileData.profileImage).toMatch(
+          /^\/images\/.+\.(png|jpg|jpeg|gif|webp)$/i,
+        );
+
+        // 画像パスが正しく構築されることを確認
+        expect(imagePath).toBe(`${basePath}${profileData.profileImage}`);
+        expect(imagePath).toMatch(
+          /^\/introduction-myself\/images\/.+\.(png|jpg|jpeg|gif|webp)$/i,
+        );
+
+        // プロフィールページタイプが正しく設定されていることを確認
+        expect(profileData.pageType).toMatch(/^(hobby|career)$/);
+
+        // 基本情報の構造が正しいことを確認
+        expect(profileData).toHaveProperty("name");
+        expect(profileData).toHaveProperty("title");
+        expect(profileData).toHaveProperty("profileImage");
+        expect(profileData).toHaveProperty("pageType");
+        expect(profileData).toHaveProperty("biography");
+        expect(profileData).toHaveProperty("expertise");
+
+        // タイトルが存在することを確認
+        expect(profileData.title).toBeTruthy();
+        expect(typeof profileData.title).toBe("string");
+
+        // 経歴と専門分野が配列であることを確認
+        expect(Array.isArray(profileData.biography)).toBe(true);
+        expect(Array.isArray(profileData.expertise)).toBe(true);
+
+        // 各ページタイプ固有の検証
+        if (profileData.pageType === "hobby") {
+          expect(profileData.name).toBe("albee");
+          expect(profileData.title).toBe("個人開発者");
+        } else if (profileData.pageType === "career") {
+          expect(profileData.name).toBe("albee");
+          expect(profileData.title).toBe("システムエンジニア");
+          expect(profileData.company).toBeTruthy();
+        }
       }),
-      { numRuns: 100 }
-    );
-  });
-
-  it("タブレット用メディアクエリが適切なブレークポイントを持つこと", () => {
-    fc.assert(
-      fc.property(fc.constant(null), () => {
-        const cssPath = path.join(process.cwd(), "app", "globals.css");
-        const cssContent = fs.readFileSync(cssPath, "utf-8");
-
-        // タブレット用メディアクエリ（min-width: 768px and max-width: 1023px）が存在することを確認
-        const tabletMinBreakpoint = /min-width\s*:\s*768px/i;
-        const tabletMaxBreakpoint = /max-width\s*:\s*1023px/i;
-
-        expect(cssContent).toMatch(tabletMinBreakpoint);
-        expect(cssContent).toMatch(tabletMaxBreakpoint);
-      }),
-      { numRuns: 100 }
-    );
-  });
-
-  it("デスクトップ用メディアクエリが適切なブレークポイントを持つこと", () => {
-    fc.assert(
-      fc.property(fc.constant(null), () => {
-        const cssPath = path.join(process.cwd(), "app", "globals.css");
-        const cssContent = fs.readFileSync(cssPath, "utf-8");
-
-        // デスクトップ用メディアクエリ（min-width: 1024px）が存在することを確認
-        const desktopBreakpoint = /min-width\s*:\s*1024px/i;
-        expect(cssContent).toMatch(desktopBreakpoint);
-      }),
-      { numRuns: 100 }
-    );
-  });
-
-  it("CSS変数でブレークポイントが定義されていること", () => {
-    fc.assert(
-      fc.property(fc.constant(null), () => {
-        const cssPath = path.join(process.cwd(), "app", "globals.css");
-        const cssContent = fs.readFileSync(cssPath, "utf-8");
-
-        // CSS変数でブレークポイントが定義されていることを確認
-        expect(cssContent).toMatch(/--breakpoint-tablet\s*:\s*768px/i);
-        expect(cssContent).toMatch(/--breakpoint-desktop\s*:\s*1024px/i);
-      }),
-      { numRuns: 100 }
-    );
-  });
-
-  it("各メディアクエリ内にスタイル定義が存在すること", () => {
-    fc.assert(
-      fc.property(fc.constant(null), () => {
-        const cssPath = path.join(process.cwd(), "app", "globals.css");
-        const cssContent = fs.readFileSync(cssPath, "utf-8");
-
-        // モバイル用メディアクエリ内にスタイル定義が存在することを確認
-        const mobileMediaQueryBlock =
-          /@media\s*\([^)]*max-width\s*:\s*767px[^)]*\)\s*\{[^}]+\}/is;
-        expect(cssContent).toMatch(mobileMediaQueryBlock);
-
-        // タブレット用メディアクエリ内にスタイル定義が存在することを確認
-        const tabletMediaQueryBlock =
-          /@media\s*\([^)]*min-width\s*:\s*768px[^)]*\)\s*and\s*\([^)]*max-width\s*:\s*1023px[^)]*\)\s*\{[^}]+\}/is;
-        expect(cssContent).toMatch(tabletMediaQueryBlock);
-
-        // デスクトップ用メディアクエリ内にスタイル定義が存在することを確認
-        const desktopMediaQueryBlock =
-          /@media\s*\([^)]*min-width\s*:\s*1024px[^)]*\)\s*\{[^}]+\}/is;
-        expect(cssContent).toMatch(desktopMediaQueryBlock);
-      }),
-      { numRuns: 100 }
+      { numRuns: 100 },
     );
   });
 });

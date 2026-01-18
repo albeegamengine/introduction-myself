@@ -32,7 +32,7 @@ const config: Config = {
         },
         background: "#ffffff",
         surface: {
-          DEFAULT: "#f8fafc",
+          DEFAULT: "var(--color-surface)",
           light: "#ffffff",
           dark: "#f1f5f9",
         },

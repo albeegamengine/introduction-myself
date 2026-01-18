@@ -2,9 +2,14 @@
 
 ## 概要
 
-本プロジェクトは、WONQ 株式会社のシステムエンジニア(SE)である麻生真介のプロフィールページを、GitHub Pages を使用して静的 Web サイトとして実装します。このページは、プロフェッショナルな外観を持ち、レスポンシブデザインを採用し、SEO 最適化を施した単一ページの Web サイトです。主な目的は、Blogger（linealbeegames4730.blogspot.com / https://www.YouTube.com/@albeegamengine）への被リンクを自然な形で提供することです。
+本プロジェクトは、WONQ 株式会社のシステムエンジニア(SE)であるalbeeの複数のプロフィールページを、GitHub Pages を使用して静的 Web サイトとして実装します。このサイトは、用途別に最適化された以下の2つのページを提供します：
 
-参考サイト（https://ujitoko.github.io/）のようなシンプルで洗練されたデザインアプローチを採用します。
+1. **趣味・個人開発用プロフィールページ** (`/hobby` パス) - 個人開発プロジェクト、技術的興味、趣味に焦点
+2. **転職活動用プロフィールページ** (`/career` パス) - 職歴、業務経験、転職関連スキルに焦点
+
+各ページは、プロフェッショナルな外観を持ち、レスポンシブデザインを採用し、SEO 最適化を施した構成となります。主な目的は、それぞれの用途に適した被リンクを自然な形で提供することです。
+
+参考サイト（https://ujitoko.github.io/）のようなシンプルで洗練されたデザインアプローチを採用し、ページ間のナビゲーションを提供します。
 
 ## アーキテクチャ
 
@@ -35,8 +40,12 @@
 /
 ├── app/
 │   ├── layout.tsx              # ルートレイアウト
-│   ├── page.tsx                # ホームページ
+│   ├── page.tsx                # ホームページ（ページ選択またはデフォルト）
 │   ├── globals.css             # グローバルスタイル
+│   ├── hobby/
+│   │   └── page.tsx            # 趣味・個人開発用プロフィールページ
+│   ├── career/
+│   │   └── page.tsx            # 転職活動用プロフィールページ
 │   └── api/                    # APIルート（必要に応じて）
 │       └── contact/
 │           └── route.ts        # お問い合わせAPI
@@ -49,13 +58,17 @@
 │   ├── Header.tsx              # ヘッダーコンポーネント
 │   ├── Profile.tsx             # プロフィールセクション
 │   ├── Links.tsx               # リンクセクション
+│   ├── Navigation.tsx          # ページ間ナビゲーション
+│   ├── PageSelector.tsx        # ページ選択コンポーネント
 │   └── Footer.tsx              # フッターコンポーネント
 ├── lib/
 │   └── utils.ts                # ユーティリティ関数（cn等）
 ├── types/
 │   └── profile.ts              # TypeScript型定義
 ├── data/
-│   └── profileData.ts          # プロフィールデータ
+│   ├── hobbyProfileData.ts     # 趣味用プロフィールデータ
+│   ├── careerProfileData.ts    # 転職活動用プロフィールデータ
+│   └── commonData.ts           # 共通データ
 ├── public/
 │   └── images/
 │       └── albee_icon.png         # プロフィール画像
@@ -85,17 +98,31 @@ graph LR
 ```mermaid
 graph TD
     A[Next.js App] --> B[App Router]
-    B --> C[page.tsx]
-    C --> D[Header Component]
-    C --> E[Profile Component]
-    C --> F[Links Component]
-    C --> G[Footer Component]
-    E --> H[Profile Data]
-    F --> I[External Links]
-    I --> J[YouTube]
-    I --> K[WONQ]
-    B --> L[API Routes]
-    L --> M[Contact API]
+    B --> C[Root page.tsx - Page Selector]
+    B --> D[/hobby/page.tsx]
+    B --> E[/career/page.tsx]
+
+    D --> F[Header Component]
+    D --> G[Profile Component - Hobby]
+    D --> H[Links Component - Hobby]
+    D --> I[Navigation Component]
+    D --> J[Footer Component]
+
+    E --> K[Header Component]
+    E --> L[Profile Component - Career]
+    E --> M[Links Component - Career]
+    E --> N[Navigation Component]
+    E --> O[Footer Component]
+
+    G --> P[Hobby Profile Data]
+    L --> Q[Career Profile Data]
+    H --> R[Hobby External Links]
+    M --> S[Career External Links]
+
+    R --> T[YouTube]
+    R --> U[Blogger]
+    S --> V[LinkedIn]
+    S --> W[GitHub]
 ```
 
 ## コンポーネントとインターフェース
@@ -110,8 +137,9 @@ graph TD
 interface HeaderProps {
   name: string;
   title: string;
-  company: CompanyInfo;
+  company?: CompanyInfo;
   profileImage: string;
+  pageType: "hobby" | "career";
 }
 ```
 
@@ -119,7 +147,7 @@ interface HeaderProps {
 
 - プロフィール画像の表示（Shadcn UI Avatar 使用）
 - 氏名の表示（h1 タグ）
-- 役職・会社名の表示
+- ページタイプに応じた役職・会社名の表示
 
 **使用する Shadcn UI コンポーネント:**
 
@@ -134,13 +162,17 @@ interface HeaderProps {
 interface ProfileProps {
   biography: string[];
   expertise: string[];
+  pageType: "hobby" | "career";
+  projects?: ProjectInfo[];
+  experience?: WorkExperience[];
 }
 ```
 
 **責務:**
 
-- 経歴情報の表示
-- 専門分野・事業領域の表示
+- ページタイプに応じた情報の表示
+- 趣味用：個人開発プロジェクト、技術的興味、趣味
+- 転職活動用：職歴、業務経験、転職関連スキル
 - レスポンシブレイアウト
 
 **使用する Shadcn UI コンポーネント:**
@@ -155,14 +187,15 @@ interface ProfileProps {
 ```typescript
 interface LinksProps {
   links: ExternalLink[];
+  pageType: "hobby" | "career";
 }
 ```
 
 **責務:**
 
-- 外部リンクの表示
-- YouTube リンク（コンテキスト付き）
-- WONQ リンク
+- ページタイプに応じた外部リンクの表示
+- 趣味用：YouTube、Blogger、GitHub リンク
+- 転職活動用：GitHub リンクポートフォリオ等
 - アクセシビリティ対応（rel="noopener noreferrer"）
 
 **使用する Shadcn UI コンポーネント:**
@@ -170,7 +203,49 @@ interface LinksProps {
 - Button（リンクボタン）
 - Card
 
-#### 4. Footer Component (`Footer.tsx`)
+#### 4. Navigation Component (`Navigation.tsx`)
+
+**Props:**
+
+```typescript
+interface NavigationProps {
+  currentPage: "hobby" | "career";
+}
+```
+
+**責務:**
+
+- ページ間のナビゲーション
+- 現在のページの表示
+- 他のページへのリンク
+
+**使用する Shadcn UI コンポーネント:**
+
+- Button
+- Badge（現在ページ表示用）
+
+#### 5. PageSelector Component (`PageSelector.tsx`)
+
+**Props:**
+
+```typescript
+interface PageSelectorProps {
+  onPageSelect?: (page: "hobby" | "career") => void;
+}
+```
+
+**責務:**
+
+- ルートページでのページ選択UI
+- 各ページの説明表示
+- ページへの誘導
+
+**使用する Shadcn UI コンポーネント:**
+
+- Card
+- Button
+
+#### 6. Footer Component (`Footer.tsx`)
 
 **Props:**
 
@@ -178,6 +253,7 @@ interface LinksProps {
 interface FooterProps {
   copyright: string;
   contactInfo?: ContactInfo;
+  pageType?: "hobby" | "career";
 }
 ```
 
@@ -185,6 +261,7 @@ interface FooterProps {
 
 - 著作権表示
 - 連絡先情報（オプション）
+- ページタイプに応じた追加情報
 
 **使用する Shadcn UI コンポーネント:**
 
@@ -232,6 +309,23 @@ export interface ExternalLink {
   url: string;
   description: string;
   isExternal?: boolean;
+  category?: "social" | "work" | "hobby" | "portfolio";
+}
+
+export interface ProjectInfo {
+  name: string;
+  description: string;
+  technologies: string[];
+  url?: string;
+  status: "active" | "completed" | "archived";
+}
+
+export interface WorkExperience {
+  company: string;
+  position: string;
+  period: string;
+  description: string[];
+  technologies?: string[];
 }
 
 export interface ContactInfo {
@@ -249,58 +343,159 @@ export interface SocialLink {
 export interface ProfileData {
   name: string;
   title: string;
-  company: CompanyInfo;
+  company?: CompanyInfo;
   profileImage: string;
   biography: string[];
   expertise: string[];
   relatedLinks: ExternalLink[];
   contactInfo?: ContactInfo;
+  pageType: "hobby" | "career";
+  projects?: ProjectInfo[];
+  experience?: WorkExperience[];
+}
+
+export interface PageConfig {
+  title: string;
+  description: string;
+  keywords: string[];
+  ogImage?: string;
 }
 ```
 
 ### プロフィールデータ実装例
 
 ```typescript
-// src/data/profileData.ts
+// src/data/hobbyProfileData.ts
 
 import { ProfileData } from "../types/profile";
 
-export const profileData: ProfileData = {
-  name: "麻生真介",
-  title: "システムエンジニア(SE)",
-  blog: {
-    name: "ブログ(個人開発)",
-    url: "https://linealbeegames4730.blogspot.com/",
-  },
+export const hobbyProfileData: ProfileData = {
+  name: "albee",
+  title: "個人開発者・技術愛好家",
   profileImage: "/images/albee_icon.png",
+  pageType: "hobby",
   biography: [
-    "経歴情報1",
-    "経歴情報2",
-    // 実際のコンテンツは実装時に追加
+    "技術への情熱を持つ個人開発者として、様々なプロジェクトに取り組んでいます。",
+    "AI技術、ゲーム開発、Web技術など幅広い分野に興味を持ち、継続的に学習を続けています。",
+    "現在はフロントエンドについて学習中です。",
   ],
   expertise: [
+    "個人開発",
+    "AI",
+    "フルスタック",
     "バックエンド",
     "フロントエンド",
-    "AI",
-    "X(旧Twitter)"
-    "Blogger",
-    "YouTube"
-    // 実際のコンテンツは実装時に追加
+    "C#",
+    "TypeScript",
+    "Kiro",
+    "Antigravity",
+    "SDD",
+  ],
+  projects: [
+    {
+      name: "個人開発用ブログ",
+      description: "技術と個人開発について発信するBloggerブログ",
+      technologies: ["Blogger", "JavaScript", "HTML/CSS"],
+      url: "https://linealbeegames4730.blogspot.com/",
+      status: "active",
+    },
+    {
+      name: "技術解説YouTube",
+      description: "プログラミングとAI技術の解説動画",
+      technologies: ["動画編集", "プレゼンテーション"],
+      url: "https://www.YouTube.com/@albeegamengine",
+      status: "active",
+    },
   ],
   relatedLinks: [
     {
-      name: "Blogger",
+      name: "個人開発用ブログ",
       url: "https://linealbeegames4730.blogspot.com/",
-      description: "個人開発用ブログ",
+      description: "個人開発用ブログ(Blogger)のリンクです。",
       isExternal: true,
+      category: "hobby",
     },
     {
       name: "YouTube",
       url: "https://www.YouTube.com/@albeegamengine",
-      description: "YouTubeリンク",
+      description: "個人開発用YouTubeのリンクです。",
       isExternal: true,
+      category: "hobby",
+    },
+    {
+      name: "GitHub",
+      url: "https://github.com/albeegamengine",
+      description: "個人開発用のGitHubのリンクです。",
+      isExternal: true,
+      category: "hobby",
     },
   ],
+};
+
+// src/data/careerProfileData.ts
+
+export const careerProfileData: ProfileData = {
+  name: "albee",
+  title: "システムエンジニア",
+  company: {
+    name: "WONQ 株式会社",
+    url: "https://wonq.co.jp", // 実際のURLに要変更
+  },
+  profileImage: "/images/albee_icon.png",
+  pageType: "career",
+  biography: [
+    "WONQ株式会社 システムエンジニア。",
+    "九州大学大学院総合理工学府修了。",
+    "2024年12月にWONQ株式会社に入社。",
+    "入社後建築企業向け業務システムや塗装企業向けの基幹システムの構築など主にバックエンド側のシステム開発に従事。",
+    "現在はフロントエンドについて学習中。",
+  ],
+  expertise: [
+    "フルスタック",
+    "バックエンド",
+    "フロントエンド",
+    "AI",
+    "C#",
+    "TypeScript",
+    "システム設計",
+    "データベース設計",
+    "API開発",
+  ],
+  experience: [
+    {
+      company: "WONQ 株式会社",
+      position: "システムエンジニア",
+      period: "2024年12月 - 現在",
+      description: [
+        "建築企業向け業務システムの構築",
+        "塗装企業向けの基幹システムの構築",
+        "主にバックエンド側のシステム開発に従事",
+        "フロントエンド技術の学習・適用",
+      ],
+      technologies: ["C#", "TypeScript", "データベース設計", "API開発"],
+    },
+  ],
+  relatedLinks: [
+    {
+      name: "GitHub",
+      url: "https://github.com/albeegamengine",
+      description: "技術的なプロジェクトとコード",
+      isExternal: true,
+      category: "portfolio",
+    },
+  ],
+};
+
+// src/data/commonData.ts
+
+export const commonData = {
+  name: "albee",
+  profileImage: "/images/albee_icon.png",
+  favicon: "/images/albee_icon.png",
+  copyright: "© 2024 albee. All rights reserved.",
+  contactInfo: {
+    email: "contact@example.com", // 実際のメールアドレスに要変更
+  },
 };
 ```
 
@@ -310,39 +505,43 @@ _プロパティとは、システムのすべての有効な実行において�
 
 ### プロパティ反映
 
-分析の結果、ほとんどの受入基準は静的 HTML ページの特定の実装例を検証するものであり、普遍的なプロパティというよりは具体的な例やエッジケースです。このプロジェクトは単一の静的ページであるため、プロパティベーステストよりもユニットテスト（HTML の構造検証）が適しています。
+分析の結果、複数ページ対応により新しいプロパティが追加され、既存のプロパティも更新されました。以下のプロパティは、両方のプロフィールページ（趣味用・転職活動用）に適用される普遍的なルールです。
 
-以下のプロパティは、HTML の構造的な正確性を検証するものです：
+### プロパティ 1: すべてのプロフィールページは基本情報を表示する
 
-### プロパティ 1: すべての外部リンクは有効な URL 形式を持つ
+_すべての_ プロフィールページについて、氏名とプロフィール画像が表示されるべきです。
 
-_すべての_ a タグについて、href 属性が存在し、有効な URL 形式（http://または https://で始まる）を持つべきです。
+**検証: 要件 1.3, 1.4**
 
-**検証: 要件 2.1, 2.2, 6.1, 6.2**
+### プロパティ 2: すべての外部リンクは正しく機能する
 
-### プロパティ 2: すべての画像は代替テキストを持つ
+_すべての_ 外部リンクについて、有効なURL形式を持ち、HTMLアンカータグとして存在し、適切な説明文を含むべきです。
 
-_すべての_ img タグについて、alt 属性が存在し、空でない値を持つべきです。
+**検証: 要件 2.4, 2.5, 2.6**
 
-**検証: 要件 7.4**
+### プロパティ 3: すべてのページはレスポンシブデザインを持つ
 
-### プロパティ 3: HTML はセマンティック構造を持つ
+_すべての_ プロフィールページについて、モバイル、タブレット、デスクトップの各画面サイズで適切にレイアウトが調整され、すべてのコンテンツが表示されるべきです。
 
-_任意の_ 有効な HTML ドキュメントについて、header、main、footer タグが存在し、適切な階層構造を持つべきです。
+**検証: 要件 4.1, 4.2, 4.3, 4.4**
 
-**検証: 要件 7.3**
+### プロパティ 4: すべてのページは統一されたデザインを持つ
 
-### プロパティ 4: 必須メタデータが存在する
+_すべての_ プロフィールページについて、統一されたカラースキーム、読みやすいタイポグラフィ、適切な余白とスペーシングを持つべきです。
 
-_任意の_ HTML ドキュメントについて、head 内に title タグと meta description タグが存在し、空でない値を持つべきです。
+**検証: 要件 5.1, 5.2, 5.3**
 
-**検証: 要件 7.1, 7.2**
+### プロパティ 5: すべてのページはナビゲーション機能を持つ
 
-### プロパティ 5: レスポンシブデザインのメディアクエリが存在する
+_すべての_ プロフィールページについて、他のプロフィールページへのナビゲーションリンクを含み、各リンクが何のページかを明示するべきです。
 
-_任意の_ CSS ファイルについて、モバイル、タブレット、デスクトップ用のメディアクエリが定義されているべきです。
+**検証: 要件 6.1, 6.4**
 
-**検証: 要件 4.1, 4.2, 4.3**
+### プロパティ 6: すべてのページは適切なHTML構造とメタデータを持つ
+
+_すべての_ プロフィールページについて、適切なtitleタグ、meta descriptionタグ、セマンティックHTMLタグ（header、main、footer等）を含み、すべての画像に適切なalt属性が設定されているべきです。
+
+**検証: 要件 7.1, 7.2, 7.3, 7.4**
 
 ## エラーハンドリング
 
@@ -365,7 +564,7 @@ _任意の_ CSS ファイルについて、モバイル、タブレット、デ�
 
 ### ユニットテスト
 
-本プロジェクトでは、HTML と CSS の構造を検証するユニットテストを実装します。
+本プロジェクトでは、複数ページの HTML と CSS の構造を検証するユニットテストを実装します。
 
 **テストツール:**
 
@@ -376,30 +575,34 @@ _任意の_ CSS ファイルについて、モバイル、タブレット、デ�
 **テスト対象:**
 
 1. **コンポーネントレンダリングテスト**
-
-   - Header コンポーネント: 氏名、役職、会社名の表示
-   - Profile コンポーネント: 経歴、専門分野の表示
-   - Links コンポーネント: 外部リンクの表示
+   - Header コンポーネント: ページタイプに応じた氏名、役職、会社名の表示
+   - Profile コンポーネント: ページタイプに応じた経歴、専門分野の表示
+   - Links コンポーネント: ページタイプに応じた外部リンクの表示
+   - Navigation コンポーネント: ページ間ナビゲーションの表示
+   - PageSelector コンポーネント: ルートページでのページ選択UI
    - Footer コンポーネント: 著作権表示
 
-2. **リンク検証テスト**
+2. **ページ固有テスト**
+   - Hobby Profile Page: 個人開発・趣味関連コンテンツの表示
+   - Career Profile Page: 転職活動・職歴関連コンテンツの表示
+   - Root Page: ページ選択機能の表示
 
-   - YouTube リンクの存在と正しい URL
-   - WONQ リンクの存在と正しい URL
+3. **リンク検証テスト**
+   - Hobby Page: YouTube、Blogger リンクの存在と正しい URL
+   - Career Page: LinkedIn、GitHub リンクの存在と正しい URL
    - すべてのリンクが有効な URL 形式を持つ
    - 外部リンクに rel="noopener noreferrer"が設定されている
+   - ナビゲーションリンクの正しい動作
 
-3. **画像検証テスト**
-
+4. **画像検証テスト**
    - プロフィール画像の存在
    - すべての画像に alt 属性が存在
 
-4. **型安全性テスト**
-
+5. **型安全性テスト**
    - TypeScript 型定義の検証
-   - プロフィールデータの型適合性
+   - 複数のプロフィールデータの型適合性
 
-5. **アクセシビリティテスト**
+6. **アクセシビリティテスト**
    - セマンティック HTML 構造
    - 画像の代替テキスト
    - 適切な見出し階層
@@ -420,29 +623,29 @@ _任意の_ CSS ファイルについて、モバイル、タブレット、デ�
 
 **テスト対象プロパティ:**
 
-1. **プロパティ 1: すべての外部リンクは有効な URL 形式を持つ**
+1. **プロパティ 1: すべてのプロフィールページは基本情報を表示する**
+   - ランダムなページタイプ（hobby/career）を生成し、すべてのページで氏名とプロフィール画像が表示されることを検証
+   - タグ: `Feature: my-profile-page, Property 1: すべてのプロフィールページは基本情報を表示する`
 
-   - ランダムな HTML 構造を生成し、すべての a タグの href 属性が有効な URL 形式であることを検証
-   - タグ: `Feature: my-profile-page, Property 1: すべての外部リンクは有効なURL形式を持つ`
+2. **プロパティ 2: すべての外部リンクは正しく機能する**
+   - ランダムなリンクデータを生成し、すべてのリンクが有効なURL形式、HTMLアンカータグ、適切な説明文を持つことを検証
+   - タグ: `Feature: my-profile-page, Property 2: すべての外部リンクは正しく機能する`
 
-2. **プロパティ 2: すべての画像は代替テキストを持つ**
+3. **プロパティ 3: すべてのページはレスポンシブデザインを持つ**
+   - ランダムな画面サイズを生成し、すべてのページで適切なレイアウト調整が行われることを検証
+   - タグ: `Feature: my-profile-page, Property 3: すべてのページはレスポンシブデザインを持つ`
 
-   - ランダムな HTML 構造を生成し、すべての img タグに alt 属性が存在し空でないことを検証
-   - タグ: `Feature: my-profile-page, Property 2: すべての画像は代替テキストを持つ`
+4. **プロパティ 4: すべてのページは統一されたデザインを持つ**
+   - ランダムなページを生成し、統一されたカラースキーム、タイポグラフィ、余白が適用されることを検証
+   - タグ: `Feature: my-profile-page, Property 4: すべてのページは統一されたデザインを持つ`
 
-3. **プロパティ 3: HTML はセマンティック構造を持つ**
+5. **プロパティ 5: すべてのページはナビゲーション機能を持つ**
+   - ランダムなページを生成し、ナビゲーションリンクが存在し、適切な説明を持つことを検証
+   - タグ: `Feature: my-profile-page, Property 5: すべてのページはナビゲーション機能を持つ`
 
-   - 有効な HTML ドキュメントについて、header、main、footer が存在することを検証
-   - タグ: `Feature: my-profile-page, Property 3: HTMLはセマンティック構造を持つ`
-
-4. **プロパティ 4: 必須メタデータが存在する**
-
-   - 有効な HTML ドキュメントについて、title と meta description が存在し空でないことを検証
-   - タグ: `Feature: my-profile-page, Property 4: 必須メタデータが存在する`
-
-5. **プロパティ 5: レスポンシブデザインのメディアクエリが存在する**
-   - CSS ファイルについて、モバイル、タブレット、デスクトップ用のメディアクエリが定義されていることを検証
-   - タグ: `Feature: my-profile-page, Property 5: レスポンシブデザインのメディアクエリが存在する`
+6. **プロパティ 6: すべてのページは適切なHTML構造とメタデータを持つ**
+   - ランダムなページを生成し、適切なメタデータ、セマンティックHTML、画像のalt属性が存在することを検証
+   - タグ: `Feature: my-profile-page, Property 6: すべてのページは適切なHTML構造とメタデータを持つ`
 
 ### E2E テスト（オプション）
 
@@ -453,12 +656,10 @@ _任意の_ CSS ファイルについて、モバイル、タブレット、デ�
 **テスト対象:**
 
 1. **ページ読み込みテスト**
-
    - ページが正常に読み込まれる
    - すべてのコンポーネントが表示される
 
 2. **リンククリックテスト**
-
    - 外部リンクが正しく機能する
    - 新しいタブで開く
 
@@ -470,11 +671,9 @@ _任意の_ CSS ファイルについて、モバイル、タブレット、デ�
 実際のブラウザ環境でのテストは、手動で実施します：
 
 1. **ブラウザ互換性テスト**
-
    - Chrome、Firefox、Safari、Edge での表示確認
 
 2. **レスポンシブデザインテスト**
-
    - 実際のモバイルデバイス、タブレット、デスクトップでの表示確認
    - ブラウザの開発者ツールでの各ブレークポイント確認
 
@@ -496,13 +695,12 @@ _任意の_ CSS ファイルについて、モバイル、タブレット、デ�
 ### SEO 最適化
 
 1. **メタタグ**
-
    - title: "albee"
-   - meta description: 麻生氏の簡潔な紹介文（150-160 文字）
+   - meta description: albeeの簡潔な紹介文（150-160 文字）
    - Open Graph タグ（SNS シェア用）
+   - favicon: `/images/albee_icon.png`
 
 2. **構造化データ**
-
    - JSON-LD フォーマットで Person スキーマを追加
    - 検索エンジンがプロフィール情報を理解しやすくする
 
@@ -514,12 +712,10 @@ _任意の_ CSS ファイルについて、モバイル、タブレット、デ�
 ### アクセシビリティ
 
 1. **セマンティック HTML**
-
    - 適切な見出し階層（h1→h2→h3）
    - landmark ロール（header、main、footer、nav）
 
 2. **キーボードナビゲーション**
-
    - すべてのリンクがキーボードでアクセス可能
    - フォーカス状態の視覚的表示
 
@@ -532,12 +728,10 @@ _任意の_ CSS ファイルについて、モバイル、タブレット、デ�
 YouTube へのリンクは、以下のいずれかの方法で自然に統合します：
 
 1. **専門分野セクション内**
-
    - 「AI 技術の活用」などの文脈で YouTube を紹介
    - 例: "AI 技術の研究開発にも注力しており、[YouTube](hhttps://www.YouTube.com/@albeegamengine)との協業を通じて..."
 
 2. **関連プロジェクトセクション**
-
    - 独立したセクションとして関連プロジェクトを紹介
    - YouTube を主要な協業先として記載
 
@@ -550,17 +744,14 @@ YouTube へのリンクは、以下のいずれかの方法で自然に統合し
 ### フェーズ 2 の機能候補
 
 1. **多言語対応**
-
    - 英語版ページの追加
    - 言語切り替え機能
 
 2. **ブログセクション**
-
    - 記事一覧ページ
    - 個別記事ページ
 
 3. **お問い合わせフォーム**
-
    - フォーム送信機能（外部サービス連携）
 
 4. **ダークモード**
@@ -569,19 +760,16 @@ YouTube へのリンクは、以下のいずれかの方法で自然に統合し
 ### 技術的な拡張
 
 1. **レンダリング戦略の最適化**
-
    - SSG（Static Site Generation）: 初期実装
    - ISR（Incremental Static Regeneration）: コンテンツ更新の自動化
    - SSR（Server-Side Rendering）: 動的コンテンツ対応
 
 2. **CMS 統合**
-
    - Headless CMS（Contentful、Sanity、Strapi）の導入
    - コンテンツの動的更新
    - マルチ言語対応
 
 3. **アナリティクス & モニタリング**
-
    - Google Analytics 4 の導入
    - Vercel Analytics の活用
    - パフォーマンスモニタリング

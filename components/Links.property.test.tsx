@@ -5,11 +5,11 @@ import { Links } from "./Links";
 import { ExternalLink } from "@/types/profile";
 
 /**
- * Feature: my-profile-page, Property 1: すべての外部リンクは有効なURL形式を持つ
+ * Feature: my-profile-page, Property 2: すべての外部リンクは有効なURL形式を持つ
  * Validates: Requirements 2.1, 2.2, 6.1, 6.2
  */
 describe("Links Component - Property Based Tests", () => {
-  describe("プロパティ 1: すべての外部リンクは有効なURL形式を持つ", () => {
+  describe("プロパティ 2: すべての外部リンクは有効なURL形式を持つ", () => {
     it("任意のExternalLink配列について、すべてのリンクが有効なURL形式を持つこと", () => {
       // URL形式のジェネレーター（http://またはhttps://で始まる）
       const validUrlArbitrary = fc.webUrl({ validSchemes: ["http", "https"] });
@@ -31,7 +31,7 @@ describe("Links Component - Property Based Tests", () => {
       fc.assert(
         fc.property(linksArrayArbitrary, (links: ExternalLink[]) => {
           // コンポーネントをレンダリング
-          const { container } = render(<Links links={links} />);
+          const { container } = render(<Links links={links} pageType="hobby" />);
 
           // すべてのaタグを取得
           const anchorElements = container.querySelectorAll("a");
@@ -56,8 +56,8 @@ describe("Links Component - Property Based Tests", () => {
 
     it("空のリンク配列でも正常に動作すること", () => {
       fc.assert(
-        fc.property(fc.constant([]), (links: ExternalLink[]) => {
-          const { container } = render(<Links links={links} />);
+        fc.property(fc.constant([] as ExternalLink[]), (links: ExternalLink[]) => {
+          const { container } = render(<Links links={links} pageType="hobby" />);
           const anchorElements = container.querySelectorAll("a");
 
           // 空の配列の場合、リンクが存在しないことを確認
@@ -84,7 +84,7 @@ describe("Links Component - Property Based Tests", () => {
 
       fc.assert(
         fc.property(linksArrayArbitrary, (links: ExternalLink[]) => {
-          const { container } = render(<Links links={links} />);
+          const { container } = render(<Links links={links} pageType="hobby" />);
           const anchorElements = container.querySelectorAll("a");
 
           // すべてのaタグについて検証

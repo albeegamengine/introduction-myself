@@ -11,19 +11,60 @@ import { Button } from "@/components/ui/button";
 
 interface LinksProps {
   links: ExternalLink[];
+  pageType: "hobby" | "career";
 }
 
-export const Links: React.FC<LinksProps> = ({ links }) => {
+export const Links: React.FC<LinksProps> = ({ links, pageType }) => {
+  // Filter links based on page type
+  const filteredLinks = links.filter((link) => {
+    if (pageType === "hobby") {
+      return (
+        link.category === "hobby" ||
+        link.category === "social" ||
+        !link.category
+      );
+    } else if (pageType === "career") {
+      return (
+        link.category === "career" ||
+        link.category === "portfolio" ||
+        link.category === "work" ||
+        !link.category
+      );
+    }
+    return true;
+  });
+
+  // Get appropriate title and description based on page type
+  const getTitle = () => {
+    switch (pageType) {
+      case "hobby":
+        return "関連リンク";
+      case "career":
+        return "ポートフォリオ・関連リンク";
+      default:
+        return "関連リンク";
+    }
+  };
+
+  const getDescription = () => {
+    switch (pageType) {
+      case "hobby":
+        return "個人開発用ブログ、YouTube、GitHubのURLです。";
+      case "career":
+        return "転職活動・キャリア関連のリンクです。";
+      default:
+        return "関連リンクです。";
+    }
+  };
+
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>関連リンク</CardTitle>
-        <CardDescription>
-          個人開発用ブログ、YouTube、GitHubのURLです。
-        </CardDescription>
+        <CardTitle>{getTitle()}</CardTitle>
+        <CardDescription>{getDescription()}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        {links.map((link, index) => (
+        {filteredLinks.map((link, index) => (
           <div key={index} className="flex flex-col space-y-2">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div className="flex-1">
@@ -61,7 +102,7 @@ export const Links: React.FC<LinksProps> = ({ links }) => {
                 </a>
               </Button>
             </div>
-            {index < links.length - 1 && (
+            {index < filteredLinks.length - 1 && (
               <div className="border-b border-border mt-4" />
             )}
           </div>

@@ -1,16 +1,16 @@
-// data/profileData.ts
+// data/careerProfileData.ts
 
 import { ProfileData } from "../types/profile";
 
-export const profileData: ProfileData = {
+export const careerProfileData: ProfileData = {
   name: "albee",
-  title: "システムエンジニア(SE)",
+  title: "システムエンジニア",
   company: {
-    name: "個人開発用ブログ(Blogger)",
+    name: "WONQ 株式会社",
     url: "https://linealbeegames4730.blogspot.com/",
   },
   profileImage: "/images/albee_icon.png",
-  pageType: "hobby", // Default to hobby for backward compatibility
+  pageType: "career",
   biography: [
     "WONQ株式会社 システムエンジニア。",
     "九州大学大学院総合理工学府修了。",
@@ -25,31 +25,45 @@ export const profileData: ProfileData = {
     "AI",
     "C#",
     "TypeScript",
-    "Kiro",
-    "Antigravity",
-    "SDD",
+    "システム設計",
+    "データベース設計",
+    "API開発",
+  ],
+  experience: [
+    {
+      company: "WONQ 株式会社",
+      position: "システムエンジニア",
+      period: "2024年12月 - 現在",
+      description: [
+        "建築企業向け業務システムの構築",
+        "塗装企業向けの基幹システムの構築",
+        "主にバックエンド側のシステム開発に従事",
+        "フロントエンド技術の学習・適用",
+      ],
+      technologies: ["C#", "TypeScript", "データベース設計", "API開発"],
+    },
   ],
   relatedLinks: [
+    {
+      name: "GitHub",
+      url: "https://github.com/albeegamengine",
+      description: "技術的なプロジェクトとコード",
+      isExternal: true,
+      category: "portfolio",
+    },
     {
       name: "個人開発用ブログ",
       url: "https://linealbeegames4730.blogspot.com/",
       description: "個人開発用ブログ(Blogger)のリンクです。",
       isExternal: true,
-      category: "hobby",
+      category: "career",
     },
     {
       name: "YouTube",
       url: "https://www.YouTube.com/@albeegamengine",
       description: "個人開発用YouTubeのリンクです。",
       isExternal: true,
-      category: "hobby",
-    },
-    {
-      name: "GitHub",
-      url: "https://github.com/albeegamengine",
-      description: "個人開発用のGitHubのリンクです。",
-      isExternal: true,
-      category: "hobby",
+      category: "career",
     },
   ],
 };
