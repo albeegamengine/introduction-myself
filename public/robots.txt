@@ -1,16 +1,3 @@
-# robots.txt for introduce-myself.github.io
-
 User-agent: *
 Allow: /
-
-# Sitemap
-Sitemap: https://introduce-myself.github.io/sitemap.xml
-
-# Disallow crawling of build artifacts
-Disallow: /_next/
-Disallow: /api/
-
-# Allow all other content
-Allow: /images/
-Allow: /*.css
-Allow: /*.js
+Sitemap: https://albeegamengine.github.io/introduction-myself/sitemap.xml

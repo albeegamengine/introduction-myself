@@ -9,6 +9,7 @@ describe("Profile Component - Integration with Real Data", () => {
       <Profile
         biography={profileData.biography}
         expertise={profileData.expertise}
+        pageType="hobby"
       />
     );
 

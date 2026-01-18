@@ -11,7 +11,7 @@ describe("Header Component", () => {
 
   const defaultProps = {
     name: "麻生真介",
-    title: "システムエンジニア",
+    title: "システムエンジニア(SE)",
     company: mockCompany,
     profileImage: "/images/albee_icon.png",
     pageType: "hobby" as const,
@@ -76,7 +76,7 @@ describe("Header Component", () => {
         // これはAvatarコンポーネントの正常な動作
         const fallback = container.querySelector('span[class*="bg-muted"]');
         expect(fallback).toBeInTheDocument();
-        expect(fallback?.textContent).toBe("albee");
+        expect(fallback?.textContent).toBe("麻");
       }
     });
 
