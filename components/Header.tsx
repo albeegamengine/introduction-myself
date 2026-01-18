@@ -8,9 +8,16 @@ interface HeaderProps {
   title: string;
   company?: CompanyInfo;
   profileImage: string;
+  pageType: "hobby" | "career";
 }
 
-export function Header({ name, title, company, profileImage }: HeaderProps) {
+export function Header({
+  name,
+  title,
+  company,
+  profileImage,
+  pageType,
+}: HeaderProps) {
   // Get initials for avatar fallback
   const initials = name
     .split(" ")

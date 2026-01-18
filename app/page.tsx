@@ -47,13 +47,20 @@ export default function Home() {
         title={profileData.title}
         company={profileData.company}
         profileImage={imagePath}
+        pageType={profileData.pageType}
       />
       <main className="container mx-auto px-4 py-8 max-w-6xl space-y-8">
         <Profile
           biography={profileData.biography}
           expertise={profileData.expertise}
+          pageType={profileData.pageType}
+          projects={profileData.projects}
+          experience={profileData.experience}
         />
-        <Links links={profileData.relatedLinks} />
+        <Links
+          links={profileData.relatedLinks}
+          pageType={profileData.pageType}
+        />
       </main>
       <Footer copyright={copyright} />
     </>

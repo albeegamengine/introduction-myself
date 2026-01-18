@@ -14,6 +14,7 @@ describe("Header Component", () => {
     title: "システムエンジニア",
     company: mockCompany,
     profileImage: "/images/albee_icon.png",
+    pageType: "hobby" as const,
   };
 
   describe("要件 1.1: 氏名の表示", () => {
@@ -40,7 +41,7 @@ describe("Header Component", () => {
       expect(companyLink).toBeInTheDocument();
       expect(companyLink).toHaveAttribute(
         "href",
-        "https://linealbeegames4730.blogspot.com/"
+        "https://linealbeegames4730.blogspot.com/",
       );
     });
 
@@ -104,7 +105,7 @@ describe("Header Component", () => {
       render(<Header {...customProps} />);
 
       expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-        "テスト太郎"
+        "テスト太郎",
       );
     });
 
