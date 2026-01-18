@@ -1,38 +1,29 @@
-import { Header } from "@/components/Header";
-import { Profile } from "@/components/Profile";
-import { Links } from "@/components/Links";
+import { PageSelector } from "@/components/PageSelector";
 import { Footer } from "@/components/Footer";
-import { profileData } from "@/data/profileData";
+import { commonData } from "@/data/commonData";
 
 export default function Home() {
   const currentYear = new Date().getFullYear();
-  const copyright = `© ${currentYear} ${profileData.name}. All rights reserved.`;
+  const copyright = `© ${currentYear} ${commonData.name}. All rights reserved.`;
 
-  const basePath = "/introduction-myself";
-  // 画像のフルパスを作成
-  const imagePath = `${basePath}${profileData.profileImage}`;
-
-  // JSON-LD構造化データ（Personスキーマ）
+  // JSON-LD構造化データ（WebSiteスキーマ）
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: profileData.name,
-    jobTitle: profileData.title,
-    ...(profileData.company && {
-      worksFor: {
-        "@type": "Organization",
-        name: profileData.company.name,
-        url: profileData.company.url,
-      },
-    }),
-    image: `https://albeegamengine.github.io${imagePath}`,
+    "@type": "WebSite",
+    name: "albeeのプロフィール",
     url: "https://albeegamengine.github.io/introduction-myself/",
-    sameAs: [
-      ...(profileData.company ? [profileData.company.url] : []),
-      ...profileData.relatedLinks.map((link) => link.url),
-    ],
-    description: profileData.biography.join(" "),
-    knowsAbout: profileData.expertise,
+    description:
+      "WONQ株式会社のシステムエンジニア albee のプロフィールページ。趣味・個人開発用と転職活動用の2つのページを提供しています。",
+    author: {
+      "@type": "Person",
+      name: commonData.name,
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target:
+        "https://albeegamengine.github.io/introduction-myself/{search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
   };
 
   return (
@@ -42,25 +33,10 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Header
-        name={profileData.name}
-        title={profileData.title}
-        company={profileData.company}
-        profileImage={imagePath}
-        pageType={profileData.pageType}
-      />
-      <main className="container mx-auto px-4 py-8 max-w-6xl space-y-8">
-        <Profile
-          biography={profileData.biography}
-          expertise={profileData.expertise}
-          pageType={profileData.pageType}
-          projects={profileData.projects}
-          experience={profileData.experience}
-        />
-        <Links
-          links={profileData.relatedLinks}
-          pageType={profileData.pageType}
-        />
+      <main className="min-h-screen flex flex-col">
+        <div className="flex-1 flex items-center justify-center py-12">
+          <PageSelector />
+        </div>
       </main>
       <Footer copyright={copyright} />
     </>
