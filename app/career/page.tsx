@@ -104,6 +104,7 @@ export default function CareerPage() {
       <Header
         name={careerProfileData.name}
         title={careerProfileData.title}
+        subTitle={careerProfileData.subTitle}
         company={careerProfileData.company}
         profileImage={imagePath}
         pageType={careerProfileData.pageType}

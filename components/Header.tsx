@@ -1,11 +1,12 @@
 import * as React from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
-import { CompanyInfo } from "@/types/profile";
+import { CompanyInfo, SubTitle } from "@/types/profile";
 
 interface HeaderProps {
   name: string;
   title: string;
+  subTitle: SubTitle;
   company?: CompanyInfo;
   profileImage: string;
   pageType: "hobby" | "career";
@@ -14,6 +15,7 @@ interface HeaderProps {
 export function Header({
   name,
   title,
+  subTitle,
   company,
   profileImage,
   pageType,
