@@ -9,10 +9,10 @@ export const hobbyProfileData: ProfileData = {
     name: "個人ブログ",
     url: "https://linealbeegames4730.blogspot.com/",
   },
-  company: {
-    name: "WONQ株式会社",
-    url: "https://wonq.co.jp/",
-  },
+  // company: {
+  //   name: "WONQ株式会社",
+  //   url: "https://wonq.co.jp/",
+  // },
   profileImage: "/images/albee_icon.png",
   pageType: "hobby",
   biography: [

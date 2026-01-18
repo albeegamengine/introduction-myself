@@ -64,6 +64,18 @@ export function Header({
                     </a>
                   </p>
                 )}
+                {subTitle && (
+                  <p className="text-base md:text-lg lg:text-xl text-muted-foreground">
+                    <a
+                      href={subTitle.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-primary transition-colors underline decoration-dotted"
+                    >
+                      {subTitle.name}
+                    </a>
+                  </p>
+                )}
               </div>
             </div>
           </CardContent>

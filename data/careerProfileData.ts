@@ -3,7 +3,7 @@
 import { ProfileData } from "../types/profile";
 
 export const careerProfileData: ProfileData = {
-  name: "albee",
+  name: "麻生真介",
   title: "システムエンジニア",
   subTitle: {
     name: "個人ブログ",
