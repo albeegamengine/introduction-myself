@@ -58,6 +58,7 @@ export default function HobbyPage() {
     "@type": "Person",
     name: hobbyProfileData.name,
     jobTitle: hobbyProfileData.title,
+    subTitle: hobbyProfileData.subTitle,
     image: `https://albeegamengine.github.io${imagePath}`,
     url: "https://albeegamengine.github.io/introduction-myself/hobby",
     sameAs: hobbyProfileData.relatedLinks.map((link) => link.url),
@@ -84,6 +85,7 @@ export default function HobbyPage() {
       <Header
         name={hobbyProfileData.name}
         title={hobbyProfileData.title}
+        subTitle={hobbyProfileData.subTitle}
         company={hobbyProfileData.company}
         profileImage={imagePath}
         pageType={hobbyProfileData.pageType}

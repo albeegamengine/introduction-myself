@@ -1,5 +1,10 @@
 // types/profile.ts
 
+export interface SubTitle {
+  name: string;
+  url: string;
+}
+
 export interface CompanyInfo {
   name: string;
   url: string;
@@ -51,9 +56,11 @@ export interface PageConfig {
 export interface ProfileData {
   name: string;
   title: string;
+  subTitle: SubTitle;
   company?: CompanyInfo;
   profileImage: string;
   biography: string[];
+  wishToDo: string[];
   expertise: string[];
   relatedLinks: ExternalLink[];
   contactInfo?: ContactInfo;

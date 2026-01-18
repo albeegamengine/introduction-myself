@@ -5,16 +5,23 @@ import { ProfileData } from "../types/profile";
 export const hobbyProfileData: ProfileData = {
   name: "albee",
   title: "個人開発者",
-  company: {
+  subTitle: {
     name: "個人ブログ",
     url: "https://linealbeegames4730.blogspot.com/",
   },
+  // company: {
+  //   name: "WONQ株式会社",
+  //   url: "https://wonq.co.jp/",
+  // },
   profileImage: "/images/albee_icon.png",
   pageType: "hobby",
   biography: [
-    "個人開発者として、様々なプロジェクトに取り組んでいます。",
-    "AI技術、ゲーム開発、Web技術など幅広い分野に興味を持ち、継続的に学習を続けています。",
-    "現在はフロントエンドについて学習中です。",
+    "個人開発を始めました。",
+    "AI技術、ゲーム、Web技術など幅広い分野に興味を持ち、継続的に学習や技術発信を続けています。",
+    "現在はフロントエンドおよびAIについて学習中です。",
+  ],
+  wishToDo: [
+    "TODO",
   ],
   expertise: [
     "個人開発",

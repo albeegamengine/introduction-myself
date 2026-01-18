@@ -3,11 +3,15 @@
 import { ProfileData } from "../types/profile";
 
 export const careerProfileData: ProfileData = {
-  name: "albee",
+  name: "麻生真介",
   title: "システムエンジニア",
-  company: {
+  subTitle: {
     name: "個人ブログ",
     url: "https://linealbeegames4730.blogspot.com/",
+  },
+  company: {
+    name: "WONQ株式会社",
+    url: "https://wonq.co.jp/",
   },
   profileImage: "/images/albee_icon.png",
   pageType: "career",
@@ -16,7 +20,10 @@ export const careerProfileData: ProfileData = {
     "九州大学大学院総合理工学府修了。",
     "2024年12月にWONQ株式会社に入社。",
     "入社後建築企業向け業務システムや塗装企業向けの基幹システムの構築など主にバックエンド側のシステム開発に従事。",
-    "現在はフロントエンドについて学習中。",
+    "現在はフロントエンドおよびAI技術について学習中。",
+  ],
+  wishToDo: [
+    "TODO",
   ],
   expertise: [
     "フルスタック",

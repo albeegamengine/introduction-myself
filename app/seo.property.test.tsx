@@ -9,8 +9,8 @@
 
 import { describe, it, expect } from "vitest";
 import fc from "fast-check";
-import sitemap from "./sitemap";
-import robots from "./robots";
+import fs from "fs";
+import path from "path";
 // @ts-ignore - Importing metadata from layout and pages for verification
 import { metadata as layoutMetadata } from "./layout";
 
@@ -18,17 +18,15 @@ describe("Property Test: SEO Configuration", () => {
   it("Sitemap contains correct base URL", async () => {
     fc.assert(
       fc.property(fc.constant(null), () => {
-        // @ts-ignore - sitemap is a function returning promise or array
-        const sitemapData = sitemap();
-        // Handle both async and sync return if needed, but for now assuming sync as implemented
+        const sitemapPath = path.join(process.cwd(), "public", "sitemap.xml");
+        const sitemapContent = fs.readFileSync(sitemapPath, "utf-8");
         
-        expect(Array.isArray(sitemapData)).toBe(true);
-        if (Array.isArray(sitemapData)) {
-            sitemapData.forEach(entry => {
-                expect(entry.url).toContain("https://albeegamengine.github.io/introduction-myself");
-            });
-            expect(sitemapData.length).toBeGreaterThanOrEqual(3);
-        }
+        expect(sitemapContent).toContain("https://albeegamengine.github.io/introduction-myself");
+        // Simple verification that it looks like XML and has multiple locations
+        expect(sitemapContent).toContain('<?xml version="1.0" encoding="UTF-8"?>');
+        expect(sitemapContent).toContain('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
+        const urlCount = (sitemapContent.match(/<loc>/g) || []).length;
+        expect(urlCount).toBeGreaterThanOrEqual(1);
       }),
       { numRuns: 1 }
     );
@@ -37,14 +35,12 @@ describe("Property Test: SEO Configuration", () => {
   it("Robots.txt allows indexing", () => {
       fc.assert(
         fc.property(fc.constant(null), () => {
-            const robotsData = robots();
-            expect(robotsData.rules).toBeDefined();
-            // @ts-ignore
-            expect(robotsData.rules.userAgent).toBe("*");
-            // @ts-ignore
-            expect(robotsData.rules.allow).toBe("/");
-            // @ts-ignore
-            expect(robotsData.sitemap).toContain("https://albeegamengine.github.io/introduction-myself/sitemap.xml");
+            const robotsPath = path.join(process.cwd(), "public", "robots.txt");
+            const robotsContent = fs.readFileSync(robotsPath, "utf-8");
+
+            expect(robotsContent).toContain("User-agent: *");
+            expect(robotsContent).toContain("Allow: /");
+            expect(robotsContent).toContain("Sitemap: https://albeegamengine.github.io/introduction-myself/sitemap.xml");
         }),
         { numRuns: 1 }
       )

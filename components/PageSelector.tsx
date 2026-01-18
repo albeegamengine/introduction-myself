@@ -31,7 +31,8 @@ export function PageSelector({ onPageSelect }: PageSelectorProps) {
             albeeのプロフィール
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            用途に応じて最適化された2つのプロフィールページをご用意しています。
+            趣味・個人開発用と転職活動用の2つのプロフィールページをご用意しています。
+            <br />
             ご覧になりたいページを選択してください。
           </p>
         </div>
@@ -99,7 +100,7 @@ export function PageSelector({ onPageSelect }: PageSelectorProps) {
         {/* Additional Information */}
         <div className="mt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            各ページには、それぞれの用途に最適化された情報とリンクが含まれています。
+            各ページには、それぞれの情報とリンクが含まれています。
           </p>
         </div>
       </div>
