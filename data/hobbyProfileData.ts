@@ -5,6 +5,10 @@ import { ProfileData } from "../types/profile";
 export const hobbyProfileData: ProfileData = {
   name: "albee",
   title: "個人開発者",
+  company: {
+    name: "個人ブログ",
+    url: "https://linealbeegames4730.blogspot.com/",
+  },
   profileImage: "/images/albee_icon.png",
   pageType: "hobby",
   biography: [

@@ -25,9 +25,6 @@ export const metadata: Metadata = {
   authors: [{ name: "麻生真介" }],
   creator: "麻生真介",
   publisher: "麻生真介",
-  icons: {
-    icon: "/images/albee_icon.png",
-  },
   openGraph: {
     type: "profile",
     locale: "ja_JP",

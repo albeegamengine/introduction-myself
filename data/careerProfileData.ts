@@ -6,7 +6,7 @@ export const careerProfileData: ProfileData = {
   name: "albee",
   title: "システムエンジニア",
   company: {
-    name: "WONQ 株式会社",
+    name: "個人ブログ",
     url: "https://linealbeegames4730.blogspot.com/",
   },
   profileImage: "/images/albee_icon.png",
@@ -25,22 +25,24 @@ export const careerProfileData: ProfileData = {
     "AI",
     "C#",
     "TypeScript",
-    "システム設計",
     "データベース設計",
-    "API開発",
+    "API設計",
+    "Kiro",
+    "Antigravity",
+    "SDD",
   ],
   experience: [
     {
       company: "WONQ 株式会社",
       position: "システムエンジニア",
-      period: "2024年12月 - 現在",
+      period: "2026年1月 - 現在",
       description: [
         "建築企業向け業務システムの構築",
         "塗装企業向けの基幹システムの構築",
         "主にバックエンド側のシステム開発に従事",
         "フロントエンド技術の学習・適用",
       ],
-      technologies: ["C#", "TypeScript", "データベース設計", "API開発"],
+      technologies: ["C#", "TypeScript", "データベース設計", "API設計"],
     },
   ],
   relatedLinks: [
