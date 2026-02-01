@@ -42,14 +42,43 @@ export const careerProfileData: ProfileData = {
     {
       company: "WONQ 株式会社",
       position: "システムエンジニア",
-      period: "2026年1月 - 現在",
+      period: "2025年12月 - 現在",
       description: [
-        "建築企業向け業務システムの構築",
-        "塗装企業向けの基幹システムの構築",
-        "主にバックエンド側のシステム開発に従事",
-        "フロントエンド技術の学習・適用",
+        {
+          text: "建築企業向け業務システムの構築",
+          details: [
+            "CI/CDパイプラインの構築により、デプロイ時間を2時間から15分に短縮",
+            "コードレビュー文化の導入により、バグ検出率が30%向上",
+          ],
+        },
+        {
+          text: "塗装企業向けの基幹システムの構築",
+          details: [
+            "コードレビュー文化の導入により、バグ検出率が30%向上",
+          ],
+        },
+        {
+          text: "主にバックエンド側のシステム開発に従事",
+        },
+        {
+          text: "フロントエンド技術の学習・適用",
+        },
       ],
-      technologies: ["C#", "TypeScript", "データベース設計", "API設計"],
+      technologies: ["TypeScript", "データベース設計", "API設計", "Kiro", "Antigravity", "SDD", "フロントエンド"],
+    },
+    {
+      company: "カナテック 株式会社",
+      position: "プログラマ",
+      period: "2022年4月 - 2025年8月",
+      description: [
+        {
+          text: "主にバックエンド側のシステム開発に従事",
+          details: [
+            "主にバックエンド側のシステム開発に従事",
+          ],
+        },
+      ],
+      technologies: ["C#", "postgres"],
     },
   ],
   relatedLinks: [

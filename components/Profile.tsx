@@ -146,14 +146,25 @@ export function Profile({
                         {exp.period}
                       </Badge>
                     </div>
-                    <div className="space-y-2 mb-3">
-                      {exp.description.map((desc, descIndex) => (
-                        <p
-                          key={descIndex}
-                          className="text-muted-foreground text-sm"
-                        >
-                          • {desc}
-                        </p>
+                    <div className="space-y-4 mb-3">
+                      {exp.description.map((item, descIndex) => (
+                        <div key={descIndex}>
+                          <p className="text-muted-foreground text-sm mb-2">
+                            • {item.text}
+                          </p>
+                          {item.details && item.details.length > 0 && (
+                            <div className="bg-white border border-gray-200 rounded-md p-3 ml-4">
+                              {item.details.map((detail, detailIndex) => (
+                                <p
+                                  key={detailIndex}
+                                  className="text-xs text-gray-700 leading-relaxed"
+                                >
+                                  ・{detail}
+                                </p>
+                              ))}
+                            </div>
+                          )}
+                        </div>
                       ))}
                     </div>
                     {exp.technologies && exp.technologies.length > 0 && (
