@@ -30,8 +30,10 @@ export interface WorkExperience {
   company: string;
   position: string;
   period: string;
-  description: string[];
-  details: string[];
+  description: {
+    text: string;
+    detail?: string;
+  }[];
   technologies?: string[];
 }
 

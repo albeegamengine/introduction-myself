@@ -55,12 +55,51 @@ describe("Profile Component", () => {
     expect(screen.getByText("経歴")).toBeInTheDocument();
   });
 
-  it("renders empty expertise gracefully", () => {
+  it("renders empty experience gracefully", () => {
     render(
       <Profile biography={mockBiography} expertise={[]} pageType="hobby" />,
     );
 
     // Section should still exist
     expect(screen.getByText("専門分野")).toBeInTheDocument();
+  });
+
+  it("renders experience with detailed descriptions", () => {
+    const mockExperience = [
+      {
+        company: "Test Company",
+        position: "Developer",
+        period: "2020 - 2021",
+        description: [
+          {
+            text: "Main responsibility",
+            detail: "Detailed info about responsibility",
+          },
+          {
+            text: "Another task",
+          },
+        ],
+        technologies: ["React"],
+      },
+    ];
+
+    render(
+      <Profile
+        biography={mockBiography}
+        expertise={mockExpertise}
+        pageType="career"
+        experience={mockExperience}
+      />
+    );
+
+    // Check basic info
+    expect(screen.getByText("Test Company")).toBeInTheDocument();
+    
+    // Check description items
+    expect(screen.getByText(/Main responsibility/)).toBeInTheDocument();
+    expect(screen.getByText(/Another task/)).toBeInTheDocument();
+    
+    // Check detail info
+    expect(screen.getByText(/Detailed info about responsibility/)).toBeInTheDocument();
   });
 });
