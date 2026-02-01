@@ -156,6 +156,21 @@ export function Profile({
                         </p>
                       ))}
                     </div>
+                    {exp.details && exp.details.length > 0 && (
+                      <div className="bg-white border border-gray-200 rounded-md p-4 mb-3 space-y-1">
+                        <p className="text-xs font-semibold text-gray-600 mb-2">
+                          詳細情報
+                        </p>
+                        {exp.details.map((detail, detailIndex) => (
+                          <p
+                            key={detailIndex}
+                            className="text-xs text-gray-700 leading-relaxed"
+                          >
+                            • {detail}
+                          </p>
+                        ))}
+                      </div>
+                    )}
                     {exp.technologies && exp.technologies.length > 0 && (
                       <div className="flex flex-wrap gap-2">
                         {exp.technologies.map((tech, techIndex) => (

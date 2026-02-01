@@ -31,6 +31,7 @@ export interface WorkExperience {
   position: string;
   period: string;
   description: string[];
+  details: string[];
   technologies?: string[];
 }
 
