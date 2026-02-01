@@ -73,7 +73,7 @@ describe("Profile Component", () => {
         description: [
           {
             text: "Main responsibility",
-            detail: "Detailed info about responsibility",
+            details: ["Detailed info about responsibility", "Second detail"],
           },
           {
             text: "Another task",
@@ -100,6 +100,7 @@ describe("Profile Component", () => {
     expect(screen.getByText(/Another task/)).toBeInTheDocument();
     
     // Check detail info
-    expect(screen.getByText(/Detailed info about responsibility/)).toBeInTheDocument();
+    expect(screen.getByText(/・Detailed info about responsibility/)).toBeInTheDocument();
+    expect(screen.getByText(/・Second detail/)).toBeInTheDocument();
   });
 });

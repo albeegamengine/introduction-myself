@@ -152,11 +152,16 @@ export function Profile({
                           <p className="text-muted-foreground text-sm mb-2">
                             • {item.text}
                           </p>
-                          {item.detail && (
+                          {item.details && item.details.length > 0 && (
                             <div className="bg-white border border-gray-200 rounded-md p-3 ml-4">
-                              <p className="text-xs text-gray-700 leading-relaxed">
-                                ・{item.detail}
-                              </p>
+                              {item.details.map((detail, detailIndex) => (
+                                <p
+                                  key={detailIndex}
+                                  className="text-xs text-gray-700 leading-relaxed"
+                                >
+                                  ・{detail}
+                                </p>
+                              ))}
                             </div>
                           )}
                         </div>

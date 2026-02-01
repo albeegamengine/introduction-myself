@@ -46,11 +46,16 @@ export const careerProfileData: ProfileData = {
       description: [
         {
           text: "建築企業向け業務システムの構築",
-          detail: "CI/CDパイプラインの構築により、デプロイ時間を2時間から15分に短縮",
+          details: [
+            "CI/CDパイプラインの構築により、デプロイ時間を2時間から15分に短縮",
+            "コードレビュー文化の導入により、バグ検出率が30%向上",
+          ],
         },
         {
           text: "塗装企業向けの基幹システムの構築",
-          detail: "コードレビュー文化の導入により、バグ検出率が30%向上",
+          details: [
+            "コードレビュー文化の導入により、バグ検出率が30%向上",
+          ],
         },
         {
           text: "主にバックエンド側のシステム開発に従事",
@@ -68,7 +73,9 @@ export const careerProfileData: ProfileData = {
       description: [
         {
           text: "主にバックエンド側のシステム開発に従事",
-          detail: "主にバックエンド側のシステム開発に従事",
+          details: [
+            "主にバックエンド側のシステム開発に従事",
+          ],
         },
       ],
       technologies: ["C#", "postgres"],

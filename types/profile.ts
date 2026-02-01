@@ -32,7 +32,7 @@ export interface WorkExperience {
   period: string;
   description: {
     text: string;
-    detail?: string;
+    details?: string[];
   }[];
   technologies?: string[];
 }
