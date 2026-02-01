@@ -46,11 +46,17 @@ export function Navigation({ currentPage }: NavigationProps) {
               <span className="text-sm text-muted-foreground hidden sm:inline">
                 他のページを見る:
               </span>
-              <Button asChild variant="outline" size="sm">
-                <Link href={`/${otherPage}`}>
+              {currentPage === "hobby" ? (
+                <Button asChild variant="outline" size="sm">
+                  <Link href={`/${otherPage}`}>
+                    {getPageLabel(otherPage)}ページへ
+                  </Link>
+                </Button>
+              ) : (
+                <Button variant="outline" size="sm" disabled>
                   {getPageLabel(otherPage)}ページへ
-                </Link>
-              </Button>
+                </Button>
+              )}
             </div>
           </div>
         </CardContent>
