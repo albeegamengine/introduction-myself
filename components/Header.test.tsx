@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { Header } from "./Header";
-import { CompanyInfo } from "@/types/profile";
+import { CompanyInfo, SubTitle } from "@/types/profile";
 
 describe("Header Component", () => {
   const mockCompany: CompanyInfo = {
@@ -13,6 +13,10 @@ describe("Header Component", () => {
     name: "麻生真介",
     title: "システムエンジニア(SE)",
     company: mockCompany,
+    subTitle: {
+      name: "albee個人開発用ブログ",
+      url: "https://linealbeegames4730.blogspot.com/",
+    },
     profileImage: "/images/albee_icon.png",
     pageType: "hobby" as const,
   };
