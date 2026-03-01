@@ -42,22 +42,18 @@ export function Navigation({ currentPage }: NavigationProps) {
             </div>
 
             {/* Navigation to other page */}
-            <div className="flex items-center gap-3">
-              <span className="text-sm text-muted-foreground hidden sm:inline">
-                他のページを見る:
-              </span>
-              {currentPage === "hobby" ? (
+            {currentPage === "hobby" && (
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-muted-foreground hidden sm:inline">
+                  他のページを見る:
+                </span>
                 <Button asChild variant="outline" size="sm">
                   <Link href={`/${otherPage}`}>
                     {getPageLabel(otherPage)}ページへ
                   </Link>
                 </Button>
-              ) : (
-                <Button variant="outline" size="sm" disabled>
-                  {getPageLabel(otherPage)}ページへ
-                </Button>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>

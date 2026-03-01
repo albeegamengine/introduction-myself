@@ -69,7 +69,7 @@ export const Links: React.FC<LinksProps> = ({ links, pageType }) => {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div className="flex-1">
                 <h3 className="font-semibold text-lg">{link.name}</h3>
-                <p className="text-sm text-muted-foreground mt-1">
+                <p className="text-sm text-muted-foreground mt-1 whitespace-pre-line">
                   {link.description}
                 </p>
               </div>
