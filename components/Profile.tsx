@@ -157,7 +157,7 @@ export function Profile({
                               {item.details.map((detail, detailIndex) => (
                                 <p
                                   key={detailIndex}
-                                  className="text-xs text-gray-700 leading-relaxed"
+                                  className="text-xs text-gray-700 leading-relaxed whitespace-pre-line"
                                 >
                                   ・{detail}
                                 </p>
