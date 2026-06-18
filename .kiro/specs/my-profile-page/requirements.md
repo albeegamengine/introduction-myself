@@ -1,4 +1,8 @@
+# Requirements Document
+
 # 要件定義書
+
+## Introduction
 
 ## はじめに
 
@@ -9,6 +13,8 @@
 2. **転職活動用プロフィールページ** (`/career` パス)
 
 主な目的は、それぞれの用途に最適化されたプロフェッショナルなプロフィールページを通じて、適切な被リンクを獲得することです。
+
+## Glossary
 
 ## 用語集
 
@@ -22,6 +28,8 @@
 - **YouTube Channel**: 被リンク先の YouTube チャンネル（https://www.YouTube.com/@albeegamengine）
 - **Path-based Routing**: URL のパス部分を使用してページを分ける仕組み
 - **Favicon**: ブラウザのタブやブックマークに表示される小さなアイコン画像
+
+## Requirements
 
 ## 要件
 
